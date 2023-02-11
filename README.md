@@ -75,9 +75,9 @@ The plugins dependencies in our pom.xml.<br>
 
 Compiling
 ```java
->mvn clean install -U
+mvn clean install -U
 ```
 Executing
 ```java
->mvn compile exec:java
+mvn compile exec:java
 ```
