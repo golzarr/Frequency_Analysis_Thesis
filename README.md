@@ -64,6 +64,9 @@ py -m pip --version
 pip 22.3.1
 ```
 (8) Installing matplotlib on Python
+```java
+py -m pip install matplotlib
+```
 
 
 ## Custom Configuration
