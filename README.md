@@ -57,6 +57,14 @@ https://www.jetbrains.com/pycharm/download/other.html
 (6) Apache Maven apache-maven-3.8.7<br>
 https://maven.apache.org/download.cgi
 
+(7) Installing Python also installs pip.
+pip is the standard package manager for Python. It allows you to install and manage additional packages that are not part of the Python standard library.
+```java
+py -m pip --version
+pip 22.3.1
+```
+(8) Installing matplotlib on Python
+
 
 ## Custom Configuration
 The plugins dependencies in our pom.xml.<br>
