@@ -93,6 +93,18 @@ Executing
 mvn compile exec:java
 ```
 
+# How to Call Python From Java
+
+The best way to achieve is using Apache Commons Exec , It works without problems for Java 8 environments, because of the fact 
+that it lets you execute any external process (including python, bash etc) in synchronous and asynchronous way by using watchdogs.
+```java
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-exec</artifactId>
+    <version>1.3</version>
+</dependency>
+```
+
 # Cracking Caesar-Cipher
 
 There are 2 types of approaches to crack Caesar-cipher:
