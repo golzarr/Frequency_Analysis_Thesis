@@ -92,3 +92,15 @@ Executing
 ```java
 mvn compile exec:java
 ```
+
+# Cracking Caesar-Cipher
+
+There are 2 types of approaches to crack Caesar-cipher:
+
+1.) Brute-force attack: the number of possible key is 26  (English Alphabet) thats why 
+considering all these cases (so check all the possible key values)
+
+
+2.) Frequency-analysis: For example in an english language text some letters are more 
+frequent than others  (E, A, O, I and T). Analyzing the ciphertext and based on the most frequent letter 
+in the cipertext we can predict the key (so the number of shifts)
