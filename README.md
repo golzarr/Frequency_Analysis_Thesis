@@ -115,4 +115,4 @@ considering all these cases (so check all the possible key values)
 
 2.) Frequency-analysis: For example in an english language text some letters are more 
 frequent than others  (E, A, O, I and T). Analyzing the ciphertext and based on the most frequent letter 
-in the cipertext we can predict the key (so the number of shifts)
+in the ciphertext we can predict the key (so the number of shifts)
