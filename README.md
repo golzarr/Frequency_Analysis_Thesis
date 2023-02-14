@@ -1,4 +1,4 @@
-# Frequency_Analysis
+# Frequency Analysis Project
 Frequency analysis from various types of text in Python
 
 
