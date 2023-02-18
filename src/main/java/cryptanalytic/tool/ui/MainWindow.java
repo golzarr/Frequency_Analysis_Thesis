@@ -2,20 +2,29 @@ package cryptanalytic.tool.ui;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import cryptanalytic.tool.python.PythonHandler;
+
 public class MainWindow {
 
 	private JFrame frmFrequencyAnalysisV;
 	private JTextField txtAlphabet;
+	private JTextArea txtr;
+	private JTextArea txtrOut;
+	private JTextArea txtrFA;
+	private PythonHandler pythonHandler = new PythonHandler();
 
 	/**
 	 * Launch the application.
@@ -53,8 +62,6 @@ public class MainWindow {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmFrequencyAnalysisV.getContentPane().add(tabbedPane);
 
-	
-
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Caesar-Cipher", null, panel, null);
 		panel.setLayout(null);
@@ -71,7 +78,7 @@ public class MainWindow {
 		scrollPane.setBounds(44, 62, 612, 124);
 		panel.add(scrollPane);
 
-		JTextArea txtr = new JTextArea();
+		txtr = new JTextArea();
 		txtr.setRows(25);
 		txtr.setColumns(25);
 
@@ -105,8 +112,9 @@ public class MainWindow {
 		scrollPane2.setBounds(42, 53, 612, 98);
 		panelFA.add(scrollPane2);
 
-		JTextArea txtrFA = new JTextArea();
-
+		txtrFA = new JTextArea();
+		txtrFA.setRows(25);
+		txtrFA.setColumns(25);
 		scrollPane2.setViewportView(txtrFA);
 		// panel.add(txtr);
 		txtrFA.setLineWrap(true);
@@ -125,6 +133,28 @@ public class MainWindow {
 		scrollPane_1.setBounds(44, 303, 612, 124);
 		panel.add(scrollPane_1);
 		txtrFA.append("ZHOFRPHCWRCWKHCDQGUHMCIUHTXHQFACDQDOAVLVCSURMHFW");
+
+		txtrOut = new JTextArea();
+		txtrOut.setRows(25);
+		txtrOut.setColumns(25);
+
+		scrollPane_1.setViewportView(txtrOut);
+		// panel.add(txtr);
+		txtrOut.setLineWrap(true);
+		txtrOut.setRows(25);
+		txtrOut.setColumns(25);
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
+				try {
+					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess();
+					txtrOut.setText(outPut);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 
 	}
 }

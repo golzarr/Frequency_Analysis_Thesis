@@ -41,6 +41,6 @@ if __name__ == '__main__':
 
     m = 'Welcome to the Andrej Frequency Analysis Project'
     encrypted = caesar_encrypt(m)
-    print(encrypted)
-    print(caesar_decrypt(encrypted))
+    print(encrypted) 
+    # print(caesar_decrypt(encrypted))
 
