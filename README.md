@@ -37,7 +37,7 @@ report on the results of the analysis
 
 (1) Python Python 3.11.1: https://www.python.org/downloads/
 ```java
-py --version
+python --version
 Python 3.11.1
 ```
 (2) Eclipse 4.16: https://archive.eclipse.org/eclipse/downloads/drops4/R-4.16-202006040540/
@@ -60,12 +60,12 @@ https://maven.apache.org/download.cgi
 (7) Installing Python also installs pip.
 pip is the standard package manager for Python. It allows you to install and manage additional packages that are not part of the Python standard library.
 ```java
-py -m pip --version
+python -m pip --version
 pip 22.3.1
 ```
 (8) Installing matplotlib on Python
 ```java
-py -m pip install matplotlib
+python -m pip install matplotlib
 ```
 
 
