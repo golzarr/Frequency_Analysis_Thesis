@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import cryptanalytic.tool.python.PythonHandler;
+import javax.swing.JComboBox;
 
 public class MainWindow {
 
@@ -25,6 +26,8 @@ public class MainWindow {
 	private JTextArea txtrOut;
 	private JTextArea txtrFA;
 	private PythonHandler pythonHandler = new PythonHandler();
+	private String[] defaultKeys = { "1", "2", "3", "4", "5", "6", "7", "8" };
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -71,7 +74,7 @@ public class MainWindow {
 		panel.add(lblNewLabel_1);
 
 		JButton btnNewButton = new JButton("caesar_encrypt");
-		btnNewButton.setBounds(187, 215, 128, 25);
+		btnNewButton.setBounds(219, 216, 128, 25);
 		panel.add(btnNewButton);
 		// txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPane = new JScrollPane();
@@ -90,7 +93,7 @@ public class MainWindow {
 		txtr.setColumns(25);
 
 		JButton btnCaesardecrypt = new JButton("caesar_decrypt");
-		btnCaesardecrypt.setBounds(342, 215, 128, 25);
+		btnCaesardecrypt.setBounds(373, 216, 128, 25);
 		panel.add(btnCaesardecrypt);
 
 		JLabel label = new JLabel("plain_text / cipher_text");
@@ -144,9 +147,20 @@ public class MainWindow {
 		txtrOut.setRows(25);
 		txtrOut.setColumns(25);
 
+		comboBox = new JComboBox<>(defaultKeys);
+		comboBox.setBounds(75, 216, 72, 22);
+		comboBox.setSelectedItem("3");
+		panel.add(comboBox);
+
+		JLabel lblNewLabel_3 = new JLabel("Key");
+		lblNewLabel_3.setBounds(43, 219, 56, 16);
+		panel.add(lblNewLabel_3);
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String key = "You selected " + comboBox.getItemAt(comboBox.getSelectedIndex());
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
+				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
 					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess();
 					txtrOut.setText(outPut);
