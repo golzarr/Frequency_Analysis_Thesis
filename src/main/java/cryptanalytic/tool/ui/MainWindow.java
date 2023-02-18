@@ -167,6 +167,10 @@ public class MainWindow {
 		lblNewLabel_4.setBounds(48, 328, 110, 16);
 		panelFA.add(lblNewLabel_4);
 
+		JPanel panelPlot = new JPanel();
+		tabbedPane.addTab("Plot Distribution FA", null, panelPlot, null);
+		panelPlot.setLayout(null);
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = "You selected " + comboBox.getItemAt(comboBox.getSelectedIndex());
