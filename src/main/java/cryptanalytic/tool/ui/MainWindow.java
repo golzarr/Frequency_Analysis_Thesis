@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import cryptanalytic.tool.python.PythonHandler;
-import javax.swing.JComboBox;
 
 public class MainWindow {
 
@@ -28,6 +28,7 @@ public class MainWindow {
 	private PythonHandler pythonHandler = new PythonHandler();
 	private String[] defaultKeys = { "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
+	private JComboBox comboBoxFA;
 
 	/**
 	 * Launch the application.
@@ -147,7 +148,7 @@ public class MainWindow {
 		txtrOut.setRows(25);
 		txtrOut.setColumns(25);
 
-		comboBox = new JComboBox<>(defaultKeys);
+		comboBox = new JComboBox(defaultKeys);
 		comboBox.setBounds(75, 216, 72, 22);
 		comboBox.setSelectedItem("3");
 		panel.add(comboBox);
@@ -155,6 +156,16 @@ public class MainWindow {
 		JLabel lblNewLabel_3 = new JLabel("Key");
 		lblNewLabel_3.setBounds(43, 219, 56, 16);
 		panel.add(lblNewLabel_3);
+
+		comboBoxFA = new JComboBox(defaultKeys);
+		comboBoxFA.setBounds(157, 325, 72, 22);
+//		comboBoxFA.setSelectedItem("3");
+		comboBoxFA.setSelectedIndex(-1);
+		panelFA.add(comboBoxFA);
+
+		JLabel lblNewLabel_4 = new JLabel("The Key Value is");
+		lblNewLabel_4.setBounds(48, 328, 110, 16);
+		panelFA.add(lblNewLabel_4);
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
