@@ -1,5 +1,5 @@
-# we need the alphabet because we convert letters into numerical values
-# to be able to use mathematical operations (note we encrypt the spaces as well)
+# With the alphabet we convert letters into numerical values
+# To be able to use mathematical operations (NO encrypting the spaces or characters)
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KEY = 3
 
