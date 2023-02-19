@@ -26,7 +26,7 @@ public class MainWindow {
 	private JTextArea txtrOut;
 	private JTextArea txtrFA;
 	private PythonHandler pythonHandler = new PythonHandler();
-	private String[] defaultKeys = { "1", "2", "3", "4", "5", "6", "7", "8" };
+	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
 	private JComboBox comboBoxFA;
 
