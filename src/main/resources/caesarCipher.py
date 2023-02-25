@@ -1,6 +1,6 @@
 import sys
 # we need the alphabet because we convert letters into numerical values
-# to be able to use mathematical operations (note we encrypt the spaces as well)
+# to be able to use mathematical operations (NO encrypting the spaces or characters)
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
