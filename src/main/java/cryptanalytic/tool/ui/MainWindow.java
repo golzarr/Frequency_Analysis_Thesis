@@ -25,6 +25,7 @@ public class MainWindow {
 	private JTextArea txtr;
 	private JTextArea txtrOut;
 	private JTextArea txtrFA;
+	private JTextArea txtrPlot;
 	private PythonHandler pythonHandler = new PythonHandler();
 	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
@@ -101,7 +102,7 @@ public class MainWindow {
 		label.setBounds(44, 271, 156, 16);
 		panel.add(label);
 		JPanel panelFA = new JPanel();
-		tabbedPane.addTab("Cracking Caesar-cipher with Frequency Analysis", null, panelFA, null);
+		tabbedPane.addTab("Cracking Caesar-Cipher with Frequency Analysis", null, panelFA, null);
 		panelFA.setLayout(null);
 
 		JLabel lblNewLabel_2 = new JLabel("Cipher Text");
@@ -136,7 +137,7 @@ public class MainWindow {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(44, 303, 612, 124);
 		panel.add(scrollPane_1);
-		txtrFA.append("ZHOFRPHCWRCWKHCDQGUHMCIUHTXHQFACDQDOAVLVCSURMHFW");
+//		txtrFA.append("ZHOFRPHCWRCWKHCDQGUHMCIUHTXHQFACDQDOAVLVCSURMHFW");
 
 		txtrOut = new JTextArea();
 		txtrOut.setRows(25);
@@ -171,11 +172,40 @@ public class MainWindow {
 		tabbedPane.addTab("Plot Distribution FA", null, panelPlot, null);
 		panelPlot.setLayout(null);
 
+		JLabel lblNewLabelFA = new JLabel("Frequency Analysis");
+		lblNewLabelFA.setBounds(44, 31, 156, 16);
+		panelPlot.add(lblNewLabelFA);
+
+		JScrollPane scrollPanePlotDistribution = new JScrollPane();
+		scrollPanePlotDistribution.setBounds(42, 53, 612, 98);
+		panelPlot.add(scrollPanePlotDistribution);
+
+		txtrPlot = new JTextArea();
+		txtrPlot.setRows(25);
+		txtrPlot.setColumns(25);
+		scrollPanePlotDistribution.setViewportView(txtrPlot);
+		txtrPlot.setLineWrap(true);
+
+		JLabel lblNewLabelPlot = new JLabel("Alphabet");
+		lblNewLabelPlot.setBounds(42, 171, 63, 16);
+		panelPlot.add(lblNewLabel);
+
+		JTextField txtAlphabetPlot = new JTextField();
+		txtAlphabetPlot.setText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+		txtAlphabetPlot.setEditable(false);
+		txtAlphabetPlot.setBounds(117, 164, 537, 31);
+		panelPlot.add(txtAlphabetPlot);
+		txtAlphabet.setColumns(10);
+
+		JButton btnFrequencyAnalysisPlot = new JButton("Generate");
+		btnFrequencyAnalysisPlot.setBounds(301, 225, 97, 25);
+		panelPlot.add(btnFrequencyAnalysisPlot);
+
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
-				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
-				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
+//				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
+//				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
 					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess("0",
 							txtr.getText(), key);
@@ -189,8 +219,6 @@ public class MainWindow {
 		btnCaesarDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
-				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
-				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
 					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess("1",
 							txtr.getText(), key);
@@ -204,12 +232,21 @@ public class MainWindow {
 		btnNewButtonCrack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBoxFA.getItemAt(comboBoxFA.getSelectedIndex()) + "";
-				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtrFA.getText());
 				try {
 					String outPut = pythonHandler
 							.givenPythonScript_whenPythonProcessExecuted_thenSuccess(txtrFA.getText());
-					JOptionPane.showMessageDialog(frmFrequencyAnalysisV, outPut);
 					comboBoxFA.setSelectedItem(outPut);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		btnFrequencyAnalysisPlot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccess(txtrPlot.getText(), "");
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

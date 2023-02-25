@@ -41,6 +41,5 @@ def caesar_crack(text):
 
 if __name__ == '__main__':
     
-    #cipher_text = 'ZHOFRPH WR WKH DQGUHM IUHTXHQFB DQDOBVLV SURMHFW'
     cipher_text = sys.argv[1]
     caesar_crack(cipher_text)

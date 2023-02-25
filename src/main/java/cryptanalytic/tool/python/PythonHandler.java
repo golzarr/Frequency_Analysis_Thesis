@@ -8,7 +8,6 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.PumpStreamHandler;
-import org.apache.commons.exec.util.StringUtils;
 
 public class PythonHandler {
 
@@ -18,31 +17,13 @@ public class PythonHandler {
 		// Parameter 1 Dencrytion
 		String line = "py "
 				+ resolvePythonScriptPath("caesarCipherThesis.py " + param + " " + key + " \"" + text + "\"");
-		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
-		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
 
 		DefaultExecutor executor = new DefaultExecutor();
 		executor.setStreamHandler(streamHandler);
-
 		int exitCode = executor.execute(cmdLine);
-//		System.out
-//				.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(exitCode)" + exitCode);
-//		System.out.println("outputStream.toString().trim():" + outputStream.toString().trim());
-
-		String separator = System.getProperty("line.separator");
-		String output = "";
-		try {
-//			StringUtils.split(outputStream.toString().trim(), separator)[0];
-			output = StringUtils.split(outputStream.toString().trim(), separator)[1];
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-//		return output;
 		return outputStream.toString().trim();
 	}
 
@@ -56,6 +37,28 @@ public class PythonHandler {
 			throws ExecuteException, IOException {
 
 		String line = "py " + resolvePythonScriptPath("frequencyAnalysisCaesar.py" + " \"" + text + "\"");
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+		int exitCode = executor.execute(cmdLine);
+		return outputStream.toString().trim();
+	}
+
+	/**
+	 * 
+	 * @param text
+	 * @param model
+	 * @return
+	 * @throws ExecuteException
+	 * @throws IOException
+	 */
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, String model)
+			throws ExecuteException, IOException {
+
+		String line = "py " + resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + "\"");
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 //		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -66,8 +69,6 @@ public class PythonHandler {
 		executor.setStreamHandler(streamHandler);
 
 		int exitCode = executor.execute(cmdLine);
-//		System.out
-//				.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(exitCode)" + exitCode);
 
 		return outputStream.toString().trim();
 	}
