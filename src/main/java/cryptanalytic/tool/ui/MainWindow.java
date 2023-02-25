@@ -200,6 +200,10 @@ public class MainWindow {
 		JButton btnFrequencyAnalysisPlot = new JButton("Generate");
 		btnFrequencyAnalysisPlot.setBounds(301, 225, 97, 25);
 		panelPlot.add(btnFrequencyAnalysisPlot);
+		
+		JPanel panelFALetters = new JPanel();
+		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
+		panelFALetters.setLayout(null);
 
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
