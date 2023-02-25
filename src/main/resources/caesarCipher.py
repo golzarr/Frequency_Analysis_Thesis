@@ -1,7 +1,7 @@
 import sys
 # we need the alphabet because we convert letters into numerical values
 # to be able to use mathematical operations (note we encrypt the spaces as well)
-ALPHABET = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 
@@ -16,12 +16,16 @@ def caesar_encrypt(plain_text, KEY):
         # find the numerical representation (index) associated with
         # that character in the alphabet
         index = ALPHABET.find(c)
-        # caesar encryption is just a simple shift of characters according
-        # to the key use modular arithmetic to transform the values within
-        # the range [0,num_of_letters_in_alphabet]
-        index = (index + int(KEY)) % len(ALPHABET)
-        # keep appending the encrypted character to the cipher_text
-        cipher_text = cipher_text + ALPHABET[index]
+        # ingnoring the blank spaces
+        if (index == -1):
+            cipher_text = cipher_text + c
+        else:    
+        	# caesar encryption is just a simple shift of characters according
+        	# to the key use modular arithmetic to transform the values within
+        	# the range [0,num_of_letters_in_alphabet]
+        	index = (index + int(KEY)) % len(ALPHABET)
+        	# keep appending the encrypted character to the cipher_text
+        	cipher_text = cipher_text + ALPHABET[index]
 
     return cipher_text
 
@@ -32,8 +36,12 @@ def caesar_decrypt(cipher_text,KEY):
 
     for c in cipher_text:
         index = ALPHABET.find(c)
-        index = (index - int(KEY)) % len(ALPHABET)
-        plain_text = plain_text + ALPHABET[index]
+        # ingnoring the blank spaces
+        if(index==-1):
+           plain_text = plain_text + c
+        else:
+           index = (index - int(KEY)) % len(ALPHABET)
+           plain_text = plain_text + ALPHABET[index]
 
     return plain_text
 
