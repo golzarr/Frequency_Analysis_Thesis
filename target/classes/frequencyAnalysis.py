@@ -33,6 +33,6 @@ def plot_distribution(frequencies):
 
 if __name__ == '__main__':
 
-    plain_text = "ZHOFRPHCWRCWKHCDQGUHMCIUHTXHQFACDQDOAVLVCSURMHFW"
+    plain_text = "ZHOFRPH WR WKH DQGUHM IUHTXHQFB DQDOBVLV SURMHFW"
     freq = frequency_analysis(plain_text)
     plot_distribution(freq)

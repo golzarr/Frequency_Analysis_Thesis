@@ -74,9 +74,9 @@ public class MainWindow {
 		lblNewLabel_1.setBounds(44, 31, 156, 16);
 		panel.add(lblNewLabel_1);
 
-		JButton btnNewButton = new JButton("caesar_encrypt");
-		btnNewButton.setBounds(219, 216, 128, 25);
-		panel.add(btnNewButton);
+		JButton btnNewButtonEncrypt = new JButton("caesar_encrypt");
+		btnNewButtonEncrypt.setBounds(219, 216, 128, 25);
+		panel.add(btnNewButtonEncrypt);
 		// txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(44, 62, 612, 124);
@@ -93,9 +93,9 @@ public class MainWindow {
 		txtr.setRows(25);
 		txtr.setColumns(25);
 
-		JButton btnCaesardecrypt = new JButton("caesar_decrypt");
-		btnCaesardecrypt.setBounds(373, 216, 128, 25);
-		panel.add(btnCaesardecrypt);
+		JButton btnCaesarDecrypt = new JButton("caesar_decrypt");
+		btnCaesarDecrypt.setBounds(373, 216, 128, 25);
+		panel.add(btnCaesarDecrypt);
 
 		JLabel label = new JLabel("plain_text / cipher_text");
 		label.setBounds(44, 271, 156, 16);
@@ -108,9 +108,9 @@ public class MainWindow {
 		lblNewLabel_2.setBounds(42, 24, 110, 16);
 		panelFA.add(lblNewLabel_2);
 
-		JButton btnNewButton1 = new JButton("Crack");
-		btnNewButton1.setBounds(301, 225, 97, 25);
-		panelFA.add(btnNewButton1);
+		JButton btnNewButtonCrack = new JButton("Crack");
+		btnNewButtonCrack.setBounds(301, 225, 97, 25);
+		panelFA.add(btnNewButtonCrack);
 //		txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPane2 = new JScrollPane();
 		scrollPane2.setBounds(42, 53, 612, 98);
@@ -171,19 +171,34 @@ public class MainWindow {
 		tabbedPane.addTab("Plot Distribution FA", null, panelPlot, null);
 		panelPlot.setLayout(null);
 
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String key = "You selected " + comboBox.getItemAt(comboBox.getSelectedIndex());
+				String key = comboBox.getItemAt(comboBox.getSelectedIndex())+"";
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
-					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess();
+					String outPut = pythonHandler.
+							givenPythonScript_whenPythonProcessExecuted_thenSuccess("0",txtr.getText(),key);
 					txtrOut.setText(outPut);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-
+		
+		btnCaesarDecrypt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String key = comboBox.getItemAt(comboBox.getSelectedIndex())+"";
+				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
+				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
+				try {
+					String outPut = pythonHandler.
+							givenPythonScript_whenPythonProcessExecuted_thenSuccess("1",txtr.getText(),key);
+					txtrOut.setText(outPut);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 }
