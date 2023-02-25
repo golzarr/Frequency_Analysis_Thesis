@@ -16,7 +16,8 @@ public class PythonHandler {
 			throws ExecuteException, IOException {
 		// Parameter 0 Encrytion
 		// Parameter 1 Dencrytion
-		String line = "py " + resolvePythonScriptPath("caesarCipher.py " + param + " " + key + " \"" + text + "\"");
+		String line = "py "
+				+ resolvePythonScriptPath("caesarCipherThesis.py " + param + " " + key + " \"" + text + "\"");
 		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -41,13 +42,38 @@ public class PythonHandler {
 			// TODO: handle exception
 		}
 
-		return output;
-//		return outputStream.toString().trim();
+//		return output;
+		return outputStream.toString().trim();
+	}
+
+	/**
+	 * @param text
+	 * @return
+	 * @throws ExecuteException
+	 * @throws IOException
+	 */
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text)
+			throws ExecuteException, IOException {
+
+		String line = "py " + resolvePythonScriptPath("frequencyAnalysisCaesar.py" + " \"" + text + "\"");
+//		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
+//		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+//		System.out
+//				.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(exitCode)" + exitCode);
+
+		return outputStream.toString().trim();
 	}
 
 	private String resolvePythonScriptPath(String filename) {
 		File file = new File("src/main/resources/" + filename);
 		return file.getAbsolutePath();
 	}
-
 }

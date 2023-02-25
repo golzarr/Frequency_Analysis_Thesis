@@ -128,7 +128,7 @@ public class MainWindow {
 		panelFA.add(lblNewLabel);
 
 		txtAlphabet = new JTextField();
-		txtAlphabet.setText(" ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+		txtAlphabet.setText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		txtAlphabet.setEditable(false);
 		txtAlphabet.setBounds(117, 164, 537, 31);
 		panelFA.add(txtAlphabet);
@@ -173,28 +173,43 @@ public class MainWindow {
 
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String key = comboBox.getItemAt(comboBox.getSelectedIndex())+"";
+				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
-					String outPut = pythonHandler.
-							givenPythonScript_whenPythonProcessExecuted_thenSuccess("0",txtr.getText(),key);
+					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess("0",
+							txtr.getText(), key);
 					txtrOut.setText(outPut);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		
+
 		btnCaesarDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String key = comboBox.getItemAt(comboBox.getSelectedIndex())+"";
+				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
 				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
-					String outPut = pythonHandler.
-							givenPythonScript_whenPythonProcessExecuted_thenSuccess("1",txtr.getText(),key);
+					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess("1",
+							txtr.getText(), key);
 					txtrOut.setText(outPut);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		btnNewButtonCrack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String key = comboBoxFA.getItemAt(comboBoxFA.getSelectedIndex()) + "";
+				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtrFA.getText());
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccess(txtrFA.getText());
+					JOptionPane.showMessageDialog(frmFrequencyAnalysisV, outPut);
+					comboBoxFA.setSelectedItem(outPut);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

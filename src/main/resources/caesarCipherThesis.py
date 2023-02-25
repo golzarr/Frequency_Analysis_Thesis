@@ -47,7 +47,7 @@ def caesar_decrypt(cipher_text,KEY):
 
 
 if __name__ == '__main__':
-    print (sys.argv[1]);
+    #Arguments
     m = sys.argv[3]
     
     if (sys.argv[1] == '0'):

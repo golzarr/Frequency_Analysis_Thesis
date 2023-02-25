@@ -1,5 +1,6 @@
 import matplotlib.pylab as plt
 
+import sys
 # these are the letters we are interested in when dealing with frequency-analysis
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -34,11 +35,12 @@ def plot_distribution(letter_frequency):
 def caesar_crack(text):
     freq = frequency_analysis(text)
     freq = sorted(freq.items(), key=lambda x: x[1], reverse=True)
-    print("The possible key value: %s" % (LETTERS.find(freq[0][0]) -
+    print("%s" % (LETTERS.find(freq[0][0]) -
                                           LETTERS.find('E')))
     
 
 if __name__ == '__main__':
     
-    cipher_text = 'ZHOFRPH WR WKH DQGUHM IUHTXHQFB DQDOBVLV SURMHFW'
+    #cipher_text = 'ZHOFRPH WR WKH DQGUHM IUHTXHQFB DQDOBVLV SURMHFW'
+    cipher_text = sys.argv[1]
     caesar_crack(cipher_text)
