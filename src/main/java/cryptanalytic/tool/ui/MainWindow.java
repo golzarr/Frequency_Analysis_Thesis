@@ -27,6 +27,7 @@ public class MainWindow {
 	private JTextArea txtrFA;
 	private JTextArea txtrPlot;
 	private JTextArea txtrLetter;
+	private JTextArea txtrLetterOutPut;
 	private PythonHandler pythonHandler = new PythonHandler();
 	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
@@ -189,7 +190,7 @@ public class MainWindow {
 
 		JLabel lblNewLabelPlot = new JLabel("Alphabet");
 		lblNewLabelPlot.setBounds(42, 171, 63, 16);
-		panelPlot.add(lblNewLabel);
+		panelPlot.add(lblNewLabelPlot);
 
 		JTextField txtAlphabetPlot = new JTextField();
 		txtAlphabetPlot.setText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -211,7 +212,7 @@ public class MainWindow {
 		panelFALetters.add(lblNewLabelFALetters);
 
 		JScrollPane scrollPaneFALetters = new JScrollPane();
-		scrollPaneFALetters.setBounds(42, 53, 612, 98);
+		scrollPaneFALetters.setBounds(44, 62, 612, 124);
 		panelFALetters.add(scrollPaneFALetters);
 
 		txtrLetter = new JTextArea();
@@ -219,6 +220,24 @@ public class MainWindow {
 		txtrLetter.setColumns(25);
 		scrollPaneFALetters.setViewportView(txtrLetter);
 		txtrLetter.setLineWrap(true);
+		
+		JButton btnLetter = new JButton("Generated Report");
+		btnLetter.setBounds(276, 225, 149, 25);
+		panelFALetters.add(btnLetter);
+
+		JLabel labelLetter = new JLabel("Output");
+		labelLetter.setBounds(44, 271, 156, 16);
+		panelFALetters.add(labelLetter);
+		
+		JScrollPane scrollPaneLetterOutPut = new JScrollPane();
+		scrollPaneLetterOutPut.setBounds(44, 303, 612, 124);
+		panelFALetters.add(scrollPaneLetterOutPut);
+		
+		txtrLetterOutPut = new JTextArea();
+		txtrLetterOutPut.setRows(25);
+		txtrLetterOutPut.setColumns(25);
+		scrollPaneLetterOutPut.setViewportView(txtrLetterOutPut);
+		txtrLetterOutPut.setLineWrap(true);
 		
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -271,5 +290,19 @@ public class MainWindow {
 				}
 			}
 		});
+		
+		btnLetter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccess(txtrLetter.getText(), 1);
+					txtrLetterOutPut.setText(outPut);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 	}
 }

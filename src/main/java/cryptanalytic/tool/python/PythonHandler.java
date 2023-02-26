@@ -57,8 +57,32 @@ public class PythonHandler {
 	 */
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, String model)
 			throws ExecuteException, IOException {
-
+		
 		String line = "py " + resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + "\"");
+//		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
+//		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+		
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+		
+		int exitCode = executor.execute(cmdLine);
+		return outputStream.toString().trim();
+	}
+	/**
+	 * 
+	 * @param text
+	 * @param model
+	 * @return
+	 * @throws ExecuteException
+	 * @throws IOException
+	 */
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, int i)
+			throws ExecuteException, IOException {
+
+		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReport.py" + " \"" + text + "\"");
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 //		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -69,7 +93,6 @@ public class PythonHandler {
 		executor.setStreamHandler(streamHandler);
 
 		int exitCode = executor.execute(cmdLine);
-
 		return outputStream.toString().trim();
 	}
 
