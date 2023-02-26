@@ -26,6 +26,7 @@ public class MainWindow {
 	private JTextArea txtrOut;
 	private JTextArea txtrFA;
 	private JTextArea txtrPlot;
+	private JTextArea txtrLetter;
 	private PythonHandler pythonHandler = new PythonHandler();
 	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
@@ -205,6 +206,20 @@ public class MainWindow {
 		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
 		panelFALetters.setLayout(null);
 
+		JLabel lblNewLabelFALetters = new JLabel("Frequency Analysis Letters");
+		lblNewLabelFALetters.setBounds(44, 31, 156, 16);
+		panelFALetters.add(lblNewLabelFALetters);
+
+		JScrollPane scrollPaneFALetters = new JScrollPane();
+		scrollPaneFALetters.setBounds(42, 53, 612, 98);
+		panelFALetters.add(scrollPaneFALetters);
+
+		txtrLetter = new JTextArea();
+		txtrLetter.setRows(25);
+		txtrLetter.setColumns(25);
+		scrollPaneFALetters.setViewportView(txtrLetter);
+		txtrLetter.setLineWrap(true);
+		
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
