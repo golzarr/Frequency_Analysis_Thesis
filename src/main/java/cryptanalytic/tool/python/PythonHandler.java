@@ -55,10 +55,10 @@ public class PythonHandler {
 	 * @throws ExecuteException
 	 * @throws IOException
 	 */
-	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, String model)
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, String alphabet)
 			throws ExecuteException, IOException {
 		
-		String line = "py " + resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + "\"");
+		String line = "py " + resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + " \""+ " "+alphabet);
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 //		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);

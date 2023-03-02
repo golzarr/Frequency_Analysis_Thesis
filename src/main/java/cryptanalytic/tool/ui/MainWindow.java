@@ -4,12 +4,13 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -188,21 +189,40 @@ public class MainWindow {
 		scrollPanePlotDistribution.setViewportView(txtrPlot);
 		txtrPlot.setLineWrap(true);
 
-		JLabel lblNewLabelPlot = new JLabel("Alphabet");
-		lblNewLabelPlot.setBounds(42, 171, 63, 16);
+		JLabel lblNewLabelPlot = new JLabel("Letters");
+		lblNewLabelPlot.setBounds(44, 233, 63, 16);
 		panelPlot.add(lblNewLabelPlot);
 
 		JTextField txtAlphabetPlot = new JTextField();
 		txtAlphabetPlot.setText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		txtAlphabetPlot.setEditable(false);
-		txtAlphabetPlot.setBounds(117, 164, 537, 31);
+		txtAlphabetPlot.setBounds(119, 226, 537, 31);
 		panelPlot.add(txtAlphabetPlot);
 		txtAlphabet.setColumns(10);
 
 		JButton btnFrequencyAnalysisPlot = new JButton("Generate");
-		btnFrequencyAnalysisPlot.setBounds(301, 225, 97, 25);
+		btnFrequencyAnalysisPlot.setBounds(301, 289, 97, 25);
 		panelPlot.add(btnFrequencyAnalysisPlot);
-		
+
+		JLabel lblNewLabel_Panel_Plot = new JLabel("Alphabet");
+		lblNewLabel_Panel_Plot.setBounds(44, 188, 56, 16);
+		panelPlot.add(lblNewLabel_Panel_Plot);
+
+		String[] Alphabet = { "English", "Slovak", "Spanish" };
+		JComboBox comboBox_Plot_FA = new JComboBox(Alphabet);
+		comboBox_Plot_FA.setBounds(119, 185, 109, 22);
+		comboBox_Plot_FA.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				String key = comboBox_Plot_FA.getItemAt(comboBox_Plot_FA.getSelectedIndex()) + "";
+				selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
+			}
+		});
+
+		panelPlot.add(comboBox_Plot_FA);
+		// String key = comboBox_Plot_FA.getItemAt(comboBox_Plot_FA.getSelectedIndex())
+		// + "";
+		selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
+
 		JPanel panelFALetters = new JPanel();
 		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
 		panelFALetters.setLayout(null);
@@ -220,7 +240,7 @@ public class MainWindow {
 		txtrLetter.setColumns(25);
 		scrollPaneFALetters.setViewportView(txtrLetter);
 		txtrLetter.setLineWrap(true);
-		
+
 		JButton btnLetter = new JButton("Generated Report");
 		btnLetter.setBounds(276, 225, 149, 25);
 		panelFALetters.add(btnLetter);
@@ -228,17 +248,17 @@ public class MainWindow {
 		JLabel labelLetter = new JLabel("Output");
 		labelLetter.setBounds(44, 271, 156, 16);
 		panelFALetters.add(labelLetter);
-		
+
 		JScrollPane scrollPaneLetterOutPut = new JScrollPane();
 		scrollPaneLetterOutPut.setBounds(44, 303, 612, 124);
 		panelFALetters.add(scrollPaneLetterOutPut);
-		
+
 		txtrLetterOutPut = new JTextArea();
 		txtrLetterOutPut.setRows(25);
 		txtrLetterOutPut.setColumns(25);
 		scrollPaneLetterOutPut.setViewportView(txtrLetterOutPut);
 		txtrLetterOutPut.setLineWrap(true);
-		
+
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
@@ -283,14 +303,16 @@ public class MainWindow {
 		btnFrequencyAnalysisPlot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String outPut = pythonHandler
-							.givenPythonScript_whenPythonProcessExecuted_thenSuccess(txtrPlot.getText(), "");
+					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(
+							txtrPlot.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
+//					System.out.println("MainWindow.initialize().new ItemListener() {...}.itemStateChanged()"
+//							+ comboBox_Plot_FA.getSelectedIndex());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		
+
 		btnLetter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -302,7 +324,22 @@ public class MainWindow {
 				}
 			}
 		});
-		
-		
+
+	}
+
+	/**
+	 * @param index
+	 * @param txtAlphabetPlot
+	 */
+	protected void selectAlphabetPlot(int index, JTextField txtAlphabetPlot) {
+		// TODO Auto-generated method stub
+		if (index == 0) {// English
+			txtAlphabetPlot.setText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+		} else if (index == 1) {// Slovak
+			txtAlphabetPlot.setText("AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ");
+		} else if (index == 2) {// Spanish
+			txtAlphabetPlot.setText("ABCDEFGHIJKLMNÑOPQRSTUVWXYZ");
+		}
+
 	}
 }

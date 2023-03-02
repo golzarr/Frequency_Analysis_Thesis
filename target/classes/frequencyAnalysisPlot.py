@@ -1,14 +1,9 @@
 import matplotlib.pylab as plt
 import sys
 
-# these are the letters we are interested in when dealing with frequency-analysis
-# WHITE SPACE IS THE MOST FREQUENT 'LETTER' IN THE ENGLISH ALPHABET !!!
-LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-
 # the method to do frequency analysis: we just count the occurrences
 # of the given characters
-def frequency_analysis(text):
+def frequency_analysis(text,LETTERS):
     # the text we analyse
     text = text.upper()
 
@@ -33,7 +28,16 @@ def plot_distribution(frequencies):
 
 
 if __name__ == '__main__':
+    #plain_text = sys.argv[1]
+    #freq = frequency_analysis(plain_text)
+    #plot_distribution(freq)
+	LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	
+	if (sys.argv[2] == '1'):
+		LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
+	elif (sys.argv[2] == '2'):
+		LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 
-    plain_text = sys.argv[1]
-    freq = frequency_analysis(plain_text)
-    plot_distribution(freq)
+	plain_text = sys.argv[1]
+	freq = frequency_analysis(plain_text,LETTERS)
+	plot_distribution(freq)
