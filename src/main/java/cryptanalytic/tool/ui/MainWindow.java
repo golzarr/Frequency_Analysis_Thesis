@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import cryptanalytic.tool.python.PythonHandler;
+import javax.swing.JRadioButton;
 
 public class MainWindow {
 
@@ -33,6 +34,7 @@ public class MainWindow {
 	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
 	private JComboBox comboBoxFA;
+	private JTextField textFieldPlotFAFile;
 
 	/**
 	 * Launch the application.
@@ -180,7 +182,7 @@ public class MainWindow {
 		panelPlot.add(lblNewLabelFA);
 
 		JScrollPane scrollPanePlotDistribution = new JScrollPane();
-		scrollPanePlotDistribution.setBounds(42, 53, 612, 98);
+		scrollPanePlotDistribution.setBounds(44, 89, 612, 98);
 		panelPlot.add(scrollPanePlotDistribution);
 
 		txtrPlot = new JTextArea();
@@ -190,27 +192,27 @@ public class MainWindow {
 		txtrPlot.setLineWrap(true);
 
 		JLabel lblNewLabelPlot = new JLabel("Letters");
-		lblNewLabelPlot.setBounds(44, 233, 63, 16);
+		lblNewLabelPlot.setBounds(44, 333, 63, 16);
 		panelPlot.add(lblNewLabelPlot);
 
 		JTextField txtAlphabetPlot = new JTextField();
 		txtAlphabetPlot.setText("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		txtAlphabetPlot.setEditable(false);
-		txtAlphabetPlot.setBounds(119, 226, 537, 31);
+		txtAlphabetPlot.setBounds(119, 326, 537, 31);
 		panelPlot.add(txtAlphabetPlot);
 		txtAlphabet.setColumns(10);
 
 		JButton btnFrequencyAnalysisPlot = new JButton("Generate");
-		btnFrequencyAnalysisPlot.setBounds(301, 289, 97, 25);
+		btnFrequencyAnalysisPlot.setBounds(301, 389, 97, 25);
 		panelPlot.add(btnFrequencyAnalysisPlot);
 
 		JLabel lblNewLabel_Panel_Plot = new JLabel("Alphabet");
-		lblNewLabel_Panel_Plot.setBounds(44, 188, 56, 16);
+		lblNewLabel_Panel_Plot.setBounds(44, 288, 56, 16);
 		panelPlot.add(lblNewLabel_Panel_Plot);
 
 		String[] Alphabet = { "English", "Slovak", "Spanish" };
 		JComboBox comboBox_Plot_FA = new JComboBox(Alphabet);
-		comboBox_Plot_FA.setBounds(119, 185, 109, 22);
+		comboBox_Plot_FA.setBounds(119, 285, 109, 22);
 		comboBox_Plot_FA.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				String key = comboBox_Plot_FA.getItemAt(comboBox_Plot_FA.getSelectedIndex()) + "";
@@ -222,6 +224,23 @@ public class MainWindow {
 		// String key = comboBox_Plot_FA.getItemAt(comboBox_Plot_FA.getSelectedIndex())
 		// + "";
 		selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
+		
+		JRadioButton rdbtnNewRadioButtonPlotFADirect = new JRadioButton("Direct Input Text (Max 100 characters)");
+		rdbtnNewRadioButtonPlotFADirect.setBounds(39, 55, 280, 25);
+		panelPlot.add(rdbtnNewRadioButtonPlotFADirect);
+		
+		JRadioButton rdbtnNewRadioButtonPlotFAFile = new JRadioButton("Reading a Text File");
+		rdbtnNewRadioButtonPlotFAFile.setBounds(39, 196, 184, 25);
+		panelPlot.add(rdbtnNewRadioButtonPlotFAFile);
+		
+		JButton btnNewButtonPlotFAFile = new JButton("File");
+		btnNewButtonPlotFAFile.setBounds(44, 230, 97, 25);
+		panelPlot.add(btnNewButtonPlotFAFile);
+		
+		textFieldPlotFAFile = new JTextField();
+		textFieldPlotFAFile.setBounds(149, 231, 507, 22);
+		panelPlot.add(textFieldPlotFAFile);
+		textFieldPlotFAFile.setColumns(10);
 
 		JPanel panelFALetters = new JPanel();
 		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
