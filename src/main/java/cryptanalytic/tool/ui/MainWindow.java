@@ -13,16 +13,20 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import javax.swing.text.PlainDocument;
 
 import cryptanalytic.tool.python.PythonHandler;
-import javax.swing.JRadioButton;
+import cryptanalytic.tool.ui.util.FileHandlerThesis;
+import cryptanalytic.tool.ui.util.StockPublicNotesDocumentFilter;
 
 public class MainWindow {
 
@@ -31,7 +35,7 @@ public class MainWindow {
 	private JTextArea txtr;
 	private JTextArea txtrOut;
 	private JTextArea txtrFA;
-	private JTextArea txtrPlot;
+	private JTextArea txtrPlotFA;
 	private JTextArea txtrLetter;
 	private JTextArea txtrLetterOutPut;
 	private PythonHandler pythonHandler = new PythonHandler();
@@ -189,11 +193,13 @@ public class MainWindow {
 		scrollPanePlotDistribution.setBounds(44, 89, 612, 98);
 		panelPlot.add(scrollPanePlotDistribution);
 
-		txtrPlot = new JTextArea();
-		txtrPlot.setRows(25);
-		txtrPlot.setColumns(25);
-		scrollPanePlotDistribution.setViewportView(txtrPlot);
-		txtrPlot.setLineWrap(true);
+		txtrPlotFA = new JTextArea();
+		txtrPlotFA.setRows(25);
+		txtrPlotFA.setColumns(25);
+		scrollPanePlotDistribution.setViewportView(txtrPlotFA);
+		txtrPlotFA.setLineWrap(true);
+		StockPublicNotesDocumentFilter publicNotesfilter = new StockPublicNotesDocumentFilter(100);
+		((PlainDocument) txtrPlotFA.getDocument()).setDocumentFilter(publicNotesfilter);
 
 		JLabel lblNewLabelPlot = new JLabel("Letters");
 		lblNewLabelPlot.setBounds(44, 333, 63, 16);
@@ -255,7 +261,7 @@ public class MainWindow {
 					jfc.setAcceptAllFileFilterUsed(false);
 					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
 					jfc.addChoosableFileFilter(filter);
-					int returnValue = jfc.showOpenDialog(null);
+					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
 					if (returnValue == JFileChooser.APPROVE_OPTION) {
 						textFieldPlotFAFile.setText(jfc.getSelectedFile().getPath());
 					}
@@ -266,6 +272,7 @@ public class MainWindow {
 		});
 
 		textFieldPlotFAFile = new JTextField();
+		textFieldPlotFAFile.setEditable(false);
 		textFieldPlotFAFile.setBounds(149, 231, 507, 22);
 		panelPlot.add(textFieldPlotFAFile);
 		textFieldPlotFAFile.setColumns(10);
@@ -350,10 +357,32 @@ public class MainWindow {
 		btnFrequencyAnalysisPlot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(
-							txtrPlot.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
+
 //					System.out.println("MainWindow.initialize().new ItemListener() {...}.itemStateChanged()"
 //							+ comboBox_Plot_FA.getSelectedIndex());
+
+					if (rdbtnNewRadioButtonPlotFADirect.isSelected()) {
+						String directInput = txtrPlotFA.getText();
+						if ((directInput == null) || (directInput.trim().length() == 0)) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "Direct Input text is required");
+							return;
+						}
+						String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(
+								txtrPlotFA.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
+					} else if (rdbtnNewRadioButtonPlotFAFile.isSelected()) {
+						// Validate Choose a File
+						String fileName = textFieldPlotFAFile.getText();
+						if ((fileName == null) || (fileName.trim().length() == 0)) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "File must be selected");
+							return;
+						}
+						boolean isEmpty = FileHandlerThesis.isFileEmpty(textFieldPlotFAFile.getText());
+						if(!isEmpty) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is empty");
+							return;
+						}
+					}
+
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
