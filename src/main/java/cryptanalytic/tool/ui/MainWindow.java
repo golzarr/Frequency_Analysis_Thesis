@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 import cryptanalytic.tool.python.PythonHandler;
 import javax.swing.JRadioButton;
@@ -224,19 +228,43 @@ public class MainWindow {
 		// String key = comboBox_Plot_FA.getItemAt(comboBox_Plot_FA.getSelectedIndex())
 		// + "";
 		selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
-		
+
 		JRadioButton rdbtnNewRadioButtonPlotFADirect = new JRadioButton("Direct Input Text (Max 100 characters)");
 		rdbtnNewRadioButtonPlotFADirect.setBounds(39, 55, 280, 25);
 		panelPlot.add(rdbtnNewRadioButtonPlotFADirect);
-		
+
 		JRadioButton rdbtnNewRadioButtonPlotFAFile = new JRadioButton("Reading a Text File");
 		rdbtnNewRadioButtonPlotFAFile.setBounds(39, 196, 184, 25);
 		panelPlot.add(rdbtnNewRadioButtonPlotFAFile);
-		
+
+		ButtonGroup groupPlotFA = new ButtonGroup();
+		groupPlotFA.add(rdbtnNewRadioButtonPlotFADirect);
+		groupPlotFA.add(rdbtnNewRadioButtonPlotFAFile);
+		rdbtnNewRadioButtonPlotFADirect.setSelected(true);
+
 		JButton btnNewButtonPlotFAFile = new JButton("File");
 		btnNewButtonPlotFAFile.setBounds(44, 230, 97, 25);
 		panelPlot.add(btnNewButtonPlotFAFile);
-		
+
+		btnNewButtonPlotFAFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					rdbtnNewRadioButtonPlotFAFile.setSelected(true);
+					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+					jfc.setDialogTitle("Select an text file");
+					jfc.setAcceptAllFileFilterUsed(false);
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+					jfc.addChoosableFileFilter(filter);
+					int returnValue = jfc.showOpenDialog(null);
+					if (returnValue == JFileChooser.APPROVE_OPTION) {
+						textFieldPlotFAFile.setText(jfc.getSelectedFile().getPath());
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
 		textFieldPlotFAFile = new JTextField();
 		textFieldPlotFAFile.setBounds(149, 231, 507, 22);
 		panelPlot.add(textFieldPlotFAFile);
