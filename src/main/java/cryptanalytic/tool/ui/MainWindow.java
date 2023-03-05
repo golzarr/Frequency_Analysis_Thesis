@@ -300,7 +300,8 @@ public class MainWindow {
 		panelFALetters.add(lblNewLabelFALetters);
 
 		JScrollPane scrollPaneFALetters = new JScrollPane();
-		scrollPaneFALetters.setBounds(44, 62, 612, 124);
+//		scrollPaneFALetters.setBounds(44, 62, 612, 124);
+		scrollPaneFALetters.setBounds(44, 89, 612, 98);
 		panelFALetters.add(scrollPaneFALetters);
 
 		txtrLetter = new JTextArea();
@@ -308,7 +309,17 @@ public class MainWindow {
 		txtrLetter.setColumns(25);
 		scrollPaneFALetters.setViewportView(txtrLetter);
 		txtrLetter.setLineWrap(true);
+		StockPublicNotesDocumentFilter publicNotesfilterLetter = new StockPublicNotesDocumentFilter(100);
+		((PlainDocument) txtrLetter.getDocument()).setDocumentFilter(publicNotesfilterLetter);
 
+		JRadioButton rdbtnNewRadioButtonLetterFADirect = new JRadioButton("Direct Input Text (Max 100 characters)");
+		rdbtnNewRadioButtonLetterFADirect.setBounds(39, 55, 280, 25);
+		panelFALetters.add(rdbtnNewRadioButtonLetterFADirect);
+
+		JRadioButton rdbtnNewRadioButtonLetterFAFile = new JRadioButton("Reading a Text File");
+		rdbtnNewRadioButtonLetterFAFile.setBounds(39, 196, 184, 25);
+		panelFALetters.add(rdbtnNewRadioButtonLetterFAFile);
+		
 		JButton btnLetter = new JButton("Generated Report");
 		btnLetter.setBounds(276, 225, 149, 25);
 		panelFALetters.add(btnLetter);
