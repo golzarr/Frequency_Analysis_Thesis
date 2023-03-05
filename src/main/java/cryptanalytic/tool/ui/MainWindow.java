@@ -356,7 +356,7 @@ public class MainWindow {
 		textFieldLetterFAFile.setColumns(10);
 
 		JButton btnLetter = new JButton("Generated Report");
-		btnLetter.setBounds(276, 277, 149, 25);
+		btnLetter.setBounds(222, 279, 149, 25);
 		panelFALetters.add(btnLetter);
 
 		JLabel labelLetter = new JLabel("Output");
@@ -372,6 +372,18 @@ public class MainWindow {
 		txtrLetterOutPut.setColumns(25);
 		scrollPaneLetterOutPut.setViewportView(txtrLetterOutPut);
 		txtrLetterOutPut.setLineWrap(true);
+		
+		JButton btnNewButtonLetterFA = new JButton("Clear Fields");
+		btnNewButtonLetterFA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnNewRadioButtonLetterFADirect.setSelected(true);
+				txtrLetter.setText("");
+				textFieldLetterFAFile.setText("");
+				txtrLetterOutPut.setText("");
+			}
+		});
+		btnNewButtonLetterFA.setBounds(387, 279, 123, 25);
+		panelFALetters.add(btnNewButtonLetterFA);
 
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
