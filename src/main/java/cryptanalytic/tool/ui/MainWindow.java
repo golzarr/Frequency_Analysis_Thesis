@@ -367,8 +367,9 @@ public class MainWindow {
 							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "Direct Input text is required");
 							return;
 						}
-						String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess(
-								txtrPlotFA.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
+						String outPut = pythonHandler
+								.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFADirectInput(
+										txtrPlotFA.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
 					} else if (rdbtnNewRadioButtonPlotFAFile.isSelected()) {
 						// Validate Choose a File
 						String fileName = textFieldPlotFAFile.getText();
@@ -377,12 +378,25 @@ public class MainWindow {
 							return;
 						}
 						boolean isEmpty = FileHandlerThesis.isFileEmpty(textFieldPlotFAFile.getText());
-						if(!isEmpty) {
+						if (!isEmpty) {
 							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is empty");
 							return;
 						}
-					}
+						int i = FileHandlerThesis.validateCharacters(textFieldPlotFAFile.getText());
+						if (i == 0) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is not having content");
+							return;
+						} else if (i == 1) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV,
+									"File is having more than 10000 Characters");
+							return;
+						} else if (i == 2) {
+							String outPut = pythonHandler
+									.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(
+											textFieldPlotFAFile.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
+						}
 
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

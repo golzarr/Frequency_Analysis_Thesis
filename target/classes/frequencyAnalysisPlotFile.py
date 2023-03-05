@@ -1,5 +1,7 @@
 import matplotlib.pylab as plt
 import sys
+import os
+
 
 # the method to do frequency analysis: we just count the occurrences
 # of the given characters
@@ -38,6 +40,17 @@ if __name__ == '__main__':
 	elif (sys.argv[2] == '2'):
 		LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 
-	plain_text = sys.argv[1]
+	
+	
+	text_file = open(sys.argv[1], "r")
+ 
+	#read whole file to a string
+	data = text_file.read()
+ 
+	#close file
+	text_file.close()
+	
+	
+	plain_text = data
 	freq = frequency_analysis(plain_text,LETTERS)
 	plot_distribution(freq)

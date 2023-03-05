@@ -55,22 +55,42 @@ public class PythonHandler {
 	 * @throws ExecuteException
 	 * @throws IOException
 	 */
-	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, String alphabet)
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFADirectInput(String text, String alphabet)
 			throws ExecuteException, IOException {
-		
-		String line = "py " + resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + " \""+ " "+alphabet);
+
+		String line = "py "
+				+ resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + " \"" + " " + alphabet);
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 //		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
-		
+
 		DefaultExecutor executor = new DefaultExecutor();
 		executor.setStreamHandler(streamHandler);
-		
+
 		int exitCode = executor.execute(cmdLine);
 		return outputStream.toString().trim();
 	}
+
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(String text, String alphabet)
+			throws ExecuteException, IOException {
+
+		String line = "py "
+				+ resolvePythonScriptPath("frequencyAnalysisPlotFile.py" + " \"" + text + " \"" + " " + alphabet);
+//		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
+//		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		return outputStream.toString().trim();
+	}
+
 	/**
 	 * 
 	 * @param text
