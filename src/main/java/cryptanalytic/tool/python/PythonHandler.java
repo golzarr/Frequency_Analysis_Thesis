@@ -99,7 +99,7 @@ public class PythonHandler {
 	 * @throws ExecuteException
 	 * @throws IOException
 	 */
-	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text, int i)
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFADirectInput(String text, int i)
 			throws ExecuteException, IOException {
 
 		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReport.py" + " \"" + text + "\"");
@@ -115,6 +115,27 @@ public class PythonHandler {
 		int exitCode = executor.execute(cmdLine);
 		return outputStream.toString().trim();
 	}
+	
+	
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFAFile(String text, int i)
+			throws ExecuteException, IOException {
+		
+		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReportFile.py" + " \"" + text + "\"");
+//		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+		
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+		
+		int exitCode = executor.execute(cmdLine);
+		return outputStream.toString().trim();
+	}
+	
+	
+	
 
 	private String resolvePythonScriptPath(String filename) {
 		File file = new File("src/main/resources/" + filename);

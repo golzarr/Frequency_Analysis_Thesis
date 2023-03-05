@@ -43,6 +43,7 @@ public class MainWindow {
 	private JComboBox comboBox;
 	private JComboBox comboBoxFA;
 	private JTextField textFieldPlotFAFile;
+	private JTextField textFieldLetterFAFile;
 
 	/**
 	 * Launch the application.
@@ -319,17 +320,51 @@ public class MainWindow {
 		JRadioButton rdbtnNewRadioButtonLetterFAFile = new JRadioButton("Reading a Text File");
 		rdbtnNewRadioButtonLetterFAFile.setBounds(39, 196, 184, 25);
 		panelFALetters.add(rdbtnNewRadioButtonLetterFAFile);
-		
+
+		ButtonGroup groupPlotLetterFA = new ButtonGroup();
+		groupPlotLetterFA.add(rdbtnNewRadioButtonLetterFADirect);
+		groupPlotLetterFA.add(rdbtnNewRadioButtonLetterFAFile);
+		rdbtnNewRadioButtonLetterFADirect.setSelected(true);
+
+		JButton btnNewButtonLetterFAFile = new JButton("File");
+		btnNewButtonLetterFAFile.setBounds(44, 230, 97, 25);
+		panelFALetters.add(btnNewButtonLetterFAFile);
+
+		btnNewButtonLetterFAFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					rdbtnNewRadioButtonLetterFAFile.setSelected(true);
+					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+					jfc.setDialogTitle("Select an text file");
+					jfc.setAcceptAllFileFilterUsed(false);
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+					jfc.addChoosableFileFilter(filter);
+					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
+					if (returnValue == JFileChooser.APPROVE_OPTION) {
+						textFieldLetterFAFile.setText(jfc.getSelectedFile().getPath());
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		textFieldLetterFAFile = new JTextField();
+		textFieldLetterFAFile.setEditable(false);
+		textFieldLetterFAFile.setBounds(149, 231, 507, 22);
+		panelFALetters.add(textFieldLetterFAFile);
+		textFieldLetterFAFile.setColumns(10);
+
 		JButton btnLetter = new JButton("Generated Report");
-		btnLetter.setBounds(276, 225, 149, 25);
+		btnLetter.setBounds(276, 277, 149, 25);
 		panelFALetters.add(btnLetter);
 
 		JLabel labelLetter = new JLabel("Output");
-		labelLetter.setBounds(44, 271, 156, 16);
+		labelLetter.setBounds(44, 319, 156, 16);
 		panelFALetters.add(labelLetter);
 
 		JScrollPane scrollPaneLetterOutPut = new JScrollPane();
-		scrollPaneLetterOutPut.setBounds(44, 303, 612, 124);
+		scrollPaneLetterOutPut.setBounds(44, 351, 612, 124);
 		panelFALetters.add(scrollPaneLetterOutPut);
 
 		txtrLetterOutPut = new JTextArea();
@@ -431,9 +466,46 @@ public class MainWindow {
 		btnLetter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String outPut = pythonHandler
-							.givenPythonScript_whenPythonProcessExecuted_thenSuccess(txtrLetter.getText(), 1);
-					txtrLetterOutPut.setText(outPut);
+
+					if (rdbtnNewRadioButtonLetterFADirect.isSelected()) {
+						String directInput = txtrLetter.getText();
+						if ((directInput == null) || (directInput.trim().length() == 0)) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "Direct Input text is required");
+							return;
+						}
+						String outPut = pythonHandler
+								.givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFADirectInput(
+										txtrLetter.getText(), 1);
+						txtrLetterOutPut.setText(outPut);
+
+					} else if (rdbtnNewRadioButtonLetterFAFile.isSelected()) {
+						// Validate Choose a File
+						String fileName = textFieldLetterFAFile.getText();
+						if ((fileName == null) || (fileName.trim().length() == 0)) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "File must be selected");
+							return;
+						}
+						boolean isEmpty = FileHandlerThesis.isFileEmpty(textFieldLetterFAFile.getText());
+						if (!isEmpty) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is empty");
+							return;
+						}
+						int i = FileHandlerThesis.validateCharacters(textFieldLetterFAFile.getText());
+						if (i == 0) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is not having content");
+							return;
+						} else if (i == 1) {
+							JOptionPane.showMessageDialog(frmFrequencyAnalysisV,
+									"File is having more than 10000 Characters");
+							return;
+						} else if (i == 2) {
+
+							String outPut = pythonHandler
+									.givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFAFile(
+											textFieldLetterFAFile.getText(), 1);
+							txtrLetterOutPut.setText(outPut);
+						}
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
