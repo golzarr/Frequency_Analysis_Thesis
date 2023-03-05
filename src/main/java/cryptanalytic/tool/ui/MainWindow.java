@@ -212,8 +212,8 @@ public class MainWindow {
 		panelPlot.add(txtAlphabetPlot);
 		txtAlphabet.setColumns(10);
 
-		JButton btnFrequencyAnalysisPlot = new JButton("Generate");
-		btnFrequencyAnalysisPlot.setBounds(301, 389, 97, 25);
+		JButton btnFrequencyAnalysisPlot = new JButton("Generate Plot");
+		btnFrequencyAnalysisPlot.setBounds(230, 396, 121, 25);
 		panelPlot.add(btnFrequencyAnalysisPlot);
 
 		JLabel lblNewLabel_Panel_Plot = new JLabel("Alphabet");
@@ -276,6 +276,20 @@ public class MainWindow {
 		textFieldPlotFAFile.setBounds(149, 231, 507, 22);
 		panelPlot.add(textFieldPlotFAFile);
 		textFieldPlotFAFile.setColumns(10);
+
+		JButton btnNewButtonPlotFA = new JButton("Clear Fields");
+		btnNewButtonPlotFA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnNewRadioButtonPlotFADirect.setSelected(true);
+				txtrPlotFA.setText("");
+				textFieldPlotFAFile.setText("");
+				comboBox_Plot_FA.setSelectedIndex(0);
+				selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
+
+			}
+		});
+		btnNewButtonPlotFA.setBounds(368, 396, 132, 25);
+		panelPlot.add(btnNewButtonPlotFA);
 
 		JPanel panelFALetters = new JPanel();
 		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
