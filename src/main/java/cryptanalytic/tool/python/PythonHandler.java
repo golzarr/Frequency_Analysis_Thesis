@@ -3,6 +3,7 @@ package cryptanalytic.tool.python;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -104,7 +105,7 @@ public class PythonHandler {
 
 		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReport.py" + " \"" + text + "\"");
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
-//		System.out.println(line);
+		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
@@ -113,29 +114,31 @@ public class PythonHandler {
 		executor.setStreamHandler(streamHandler);
 
 		int exitCode = executor.execute(cmdLine);
-		return outputStream.toString().trim();
+//		return outputStream.toString().trim();
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		System.out.println(":P:P-->" + out);
+		return out;
 	}
-	
-	
+
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFAFile(String text, int i)
 			throws ExecuteException, IOException {
-		
+
 		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReportFile.py" + " \"" + text + "\"");
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
-//		System.out.println(line);
+		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
-		
+
 		DefaultExecutor executor = new DefaultExecutor();
 		executor.setStreamHandler(streamHandler);
-		
+
 		int exitCode = executor.execute(cmdLine);
-		return outputStream.toString().trim();
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFAFile()" + out);
+		return out;
+//		return outputStream.toString().trim();
 	}
-	
-	
-	
 
 	private String resolvePythonScriptPath(String filename) {
 		File file = new File("src/main/resources/" + filename);

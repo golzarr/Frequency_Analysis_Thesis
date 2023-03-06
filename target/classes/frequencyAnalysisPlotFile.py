@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
 	
 	
-	text_file = open(sys.argv[1], "r")
+	text_file = open(sys.argv[1], "r", encoding='utf-8')
  
 	#read whole file to a string
 	data = text_file.read()

@@ -16,7 +16,9 @@ def main(source):
     for letter, count in frequency.items():
         plain_text = plain_text + "{}\t\t{}".format(letter, count) + "\r\n"
         
-    print(plain_text)
+    TestText2 = plain_text.encode('utf8')
+    #print(plain_text)
+    sys.stdout.buffer.write(TestText2)
 
 if __name__ == "__main__":
     text = sys.argv[1]

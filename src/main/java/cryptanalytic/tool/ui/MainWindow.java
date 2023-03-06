@@ -372,7 +372,7 @@ public class MainWindow {
 		txtrLetterOutPut.setColumns(25);
 		scrollPaneLetterOutPut.setViewportView(txtrLetterOutPut);
 		txtrLetterOutPut.setLineWrap(true);
-		
+
 		JButton btnNewButtonLetterFA = new JButton("Clear Fields");
 		btnNewButtonLetterFA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -480,7 +480,10 @@ public class MainWindow {
 				try {
 
 					if (rdbtnNewRadioButtonLetterFADirect.isSelected()) {
-						String directInput = txtrLetter.getText();
+//						String directInput = txtrLetter.getText();
+						String directInput = new String(txtrLetter.getText().getBytes(), "UTF-8");
+						System.out.println(
+								"MainWindow.initialize().new ActionListener() {...}.actionPerformed()" + directInput);
 						if ((directInput == null) || (directInput.trim().length() == 0)) {
 							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "Direct Input text is required");
 							return;
