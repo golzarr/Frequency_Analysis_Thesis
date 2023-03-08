@@ -51,19 +51,16 @@ OpenJDK 64-Bit Server VM (Temurin)(build 25.362-b09, mixed mode)
 ```
 (4) Git: https://git-scm.com/download/win
 
-(5) Python IDE: Pycharm Community Version<br>
-https://www.jetbrains.com/pycharm/download/other.html
-
-(6) Apache Maven apache-maven-3.8.7<br>
+(5) Apache Maven apache-maven-3.8.7<br>
 https://maven.apache.org/download.cgi
 
-(7) Installing Python also installs pip.
+(6) Installing Python also installs pip.
 pip is the standard package manager for Python. It allows you to install and manage additional packages that are not part of the Python standard library.
 ```java
 python -m pip --version
 pip 22.3.1
 ```
-(8) Installing matplotlib on Python
+(7) Installing matplotlib on Python
 ```java
 python -m pip install matplotlib
 ```
