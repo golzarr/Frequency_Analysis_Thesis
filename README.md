@@ -58,7 +58,7 @@ https://maven.apache.org/download.cgi
 pip is the standard package manager for Python. It allows you to install and manage additional packages that are not part of the Python standard library.
 ```java
 python -m pip --version
-pip 22.3.1
+python 22.3.1
 ```
 (7) Installing matplotlib and pyperclip on Python
 ```java
