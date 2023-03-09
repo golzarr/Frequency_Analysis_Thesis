@@ -1,6 +1,5 @@
 import sys, random
 
-
 Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def main():
