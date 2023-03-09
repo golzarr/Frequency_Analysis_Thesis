@@ -60,9 +60,10 @@ pip is the standard package manager for Python. It allows you to install and man
 python -m pip --version
 pip 22.3.1
 ```
-(7) Installing matplotlib on Python
+(7) Installing matplotlib and pyperclip on Python
 ```java
 python -m pip install matplotlib
+py -m pip install pyperclip
 ```
 
 
