@@ -63,7 +63,7 @@ python 22.3.1
 (7) Installing matplotlib and pyperclip on Python
 ```java
 python -m pip install matplotlib
-py -m pip install pyperclip
+python -m pip install pyperclip
 ```
 
 
