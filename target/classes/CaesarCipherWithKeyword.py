@@ -1,7 +1,7 @@
 import sys, random
 
 
-LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def main():
     #myMessage = 'If a man is offered a fact which goes against his instincts, he will scrutinize it closely, and unless the evidence is overwhelming, he will refuse to believe it. If, on the other hand, he is offered something which affords a reason for acting in accordance to his instincts, he will accept it even on the slightest evidence. The origin of myths is explained in this way. -Bertrand Russell'
@@ -24,11 +24,11 @@ def main():
 
 def keyIsValid(key):
     keyList = list(key)
-    lettersList = list(LETTERS)
+    AlphabetList = list(Alphabet)
     keyList.sort()
-    lettersList.sort()
+    AlphabetList.sort()
 
-    return keyList == lettersList
+    return keyList == AlphabetList
 
 
 def encryptMessage(key, message):
@@ -41,11 +41,11 @@ def decryptMessage(key, message):
 
 def translateMessage(key, message, mode):
     translated = ''
-    charsA = LETTERS
+    charsA = Alphabet
     charsB = key
     if mode == 'decrypt':
         # For decrypting, we can use the same code as encrypting. We
-        # just need to swap where the key and LETTERS strings are used.
+        # just need to swap where the key and Alphabet strings are used.
         charsA, charsB = charsB, charsA
 
     # Loop through each symbol in message:
@@ -58,14 +58,14 @@ def translateMessage(key, message, mode):
             else:
                 translated += charsB[symIndex].lower()
         else:
-            # Symbol is not in LETTERS; just add it
+            # Symbol is not in Alphabet; just add it
             translated += symbol
 
     return translated
 
 
 def getRandomKey():
-    key = list(LETTERS)
+    key = list(Alphabet)
     random.shuffle(key)
     return ''.join(key)
 
