@@ -77,7 +77,7 @@ public class MainWindow {
 		frmFrequencyAnalysisV.setBounds(100, 100, 736, 581);
 		frmFrequencyAnalysisV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFrequencyAnalysisV.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
-
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmFrequencyAnalysisV.getContentPane().add(tabbedPane);
 
@@ -85,6 +85,7 @@ public class MainWindow {
 		tabbedPane.addTab("Caesar-Cipher", null, panel, null);
 		panel.setLayout(null);
 
+		
 		JLabel lblNewLabel_1 = new JLabel("plain_text / cipher_text");
 		lblNewLabel_1.setBounds(44, 31, 156, 16);
 		panel.add(lblNewLabel_1);
@@ -104,7 +105,7 @@ public class MainWindow {
 		scrollPane.setViewportView(txtr);
 		// panel.add(txtr);
 		txtr.setLineWrap(true);
-		txtr.append("WELCOME TO THE ANDREJ FREQUENCY ANALYSIS PROJECT");
+		txtr.append("WELCOME TO THE CAESAR CIPHER");
 		txtr.setRows(25);
 		txtr.setColumns(25);
 
@@ -330,6 +331,114 @@ public class MainWindow {
 		btnNewButtonLetterFAFile.setBounds(44, 230, 97, 25);
 		panelFALetters.add(btnNewButtonLetterFAFile);
 
+		
+		
+		
+		
+		
+		
+		//panelSubstitutionCipherWithaKeyword
+		
+		
+		
+		JPanel panelSubstitutionCipherWithaKeyword = new JPanel();
+		tabbedPane.addTab("Substitution Cipher With a Keyword", null, panelSubstitutionCipherWithaKeyword, null);
+		panelSubstitutionCipherWithaKeyword.setLayout(null);
+		
+
+		JLabel lblNewLabel_1s = new JLabel("plain_text / cipher_text");
+		lblNewLabel_1s.setBounds(44, 31, 156, 16);
+		panelSubstitutionCipherWithaKeyword.add(lblNewLabel_1s);
+
+		JButton btnNewButtonEncrypts = new JButton("encrypt");
+		btnNewButtonEncrypts.setBounds(219, 216, 128, 25);
+		panelSubstitutionCipherWithaKeyword.add(btnNewButtonEncrypts);
+		// txtr.setBounds(43, 104, 98, 98);
+		JScrollPane scrollPanes = new JScrollPane();
+    	scrollPanes.setBounds(44, 62, 612, 124);
+	    panelSubstitutionCipherWithaKeyword.add(scrollPanes);
+
+		JTextArea txtrs = new JTextArea();
+		txtrs.setRows(25);
+		txtrs.setColumns(25);
+
+		scrollPanes.setViewportView(txtrs);
+	  //panelSubstitutionCipherWithaKeyword.add(txtrs);
+		txtrs.setLineWrap(true);
+	//	txtrs.append("WELCOME TO THE CAESAR CIPHER");
+		txtrs.setRows(25);
+		txtrs.setColumns(25);
+
+		JButton btnCaesarDecrypts = new JButton("decrypt");
+		btnCaesarDecrypts.setBounds(373, 216, 128, 25);
+		panelSubstitutionCipherWithaKeyword.add(btnCaesarDecrypts);
+
+		JLabel labels = new JLabel("plain_text / cipher_text");
+		labels.setBounds(44, 251, 156, 16);
+		panelSubstitutionCipherWithaKeyword.add(labels);
+		
+		JLabel lblNewLabel_2sss = new JLabel("Keyword:");
+		lblNewLabel_2sss.setBounds(44, 191, 56, 16);
+		panelSubstitutionCipherWithaKeyword.add(lblNewLabel_2sss);
+
+		
+		JTextField keywordTextFieldsss = new JTextField();
+		keywordTextFieldsss.setBounds(101, 188, 209, 22);
+		panelSubstitutionCipherWithaKeyword.add(keywordTextFieldsss);
+		
+		JScrollPane scrollPane_1ss = new JScrollPane();
+		scrollPane_1ss.setBounds(44, 272, 612, 124);
+		panelSubstitutionCipherWithaKeyword.add(scrollPane_1ss);
+
+		JTextArea outputTextAreas = new JTextArea();
+		scrollPane_1ss.setViewportView(outputTextAreas);
+
+		
+		/////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		JPanel panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis = new JPanel();
+		tabbedPane.addTab("Cracking Substitution Cipher With a Keyword Using Frequency Analysis", null, panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis, null);
+		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.setLayout(null);
+		
+		JLabel lblNewLabel_1ss = new JLabel("ciphertext");
+		lblNewLabel_1ss.setBounds(44, 31, 156, 16);
+		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(lblNewLabel_1ss);
+
+//		JButton btnEncrypts = new JButton("Encrypt");
+//		btnEncrypts.setBounds(219, 216, 128, 25);
+//		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(btnEncrypts);
+
+		JScrollPane scrollPaness = new JScrollPane();
+		scrollPaness.setBounds(44, 62, 612, 124);
+		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(scrollPaness);
+
+		JTextArea textAreas = new JTextArea();
+		scrollPaness.setViewportView(textAreas);
+
+		JButton btnDecrypts = new JButton("decrypt");
+		btnDecrypts.setBounds(280, 216, 128, 25);
+		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(btnDecrypts);
+
+	//	JLabel lblNewLabel_2ss = new JLabel("Keyword:");
+	//	lblNewLabel_2ss.setBounds(44, 206, 56, 16);
+	//	panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(lblNewLabel_2ss);
+
+	//	JTextField keywordTextFieldss = new JTextField();
+	//	keywordTextFieldss.setBounds(101, 203, 209, 22);
+	//	panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(keywordTextFieldss);
+
+		JLabel labelss = new JLabel("plain_text");
+		labelss.setBounds(44, 251, 156, 16);
+		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(labelss);
+
+		JScrollPane scrollPane_1sss = new JScrollPane();
+		scrollPane_1sss.setBounds(44, 272, 612, 124);
+		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(scrollPane_1sss);
+
+		JTextArea outputTextAreass = new JTextArea();
+		scrollPane_1sss.setViewportView(outputTextAreass);
+		
 		btnNewButtonLetterFAFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
