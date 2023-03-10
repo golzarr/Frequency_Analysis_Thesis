@@ -2,32 +2,23 @@ import sys, random
 
 Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-def main():
-    #myMessage = 'If a man is offered a fact which goes against his instincts, he will scrutinize it closely, and unless the evidence is overwhelming, he will refuse to believe it. If, on the other hand, he is offered something which affords a reason for acting in accordance to his instincts, he will accept it even on the slightest evidence. The origin of myths is explained in this way. -Bertrand Russell'
-    #myKey = 'LFWOAYUISVKMNXPBDCRJTQEGHZ'
-
-    myMessage = 'If a man is offered a fact which goes against his instincts, he will scrutinize it closely, and unless the evidence is overwhelming, he will refuse to believe it. If, on the other hand, he is offered something which affords a reason for acting in accordance to his instincts, he will accept it even on the slightest evidence. The origin of myths is explained in this way. -Bertrand Russell'
-    myKey = 'LFWOAYUISVKMNXPBDCRJTQEGHZ'
-    myMode = 'encrypt' # Set to either 'encrypt' or 'decrypt'.
-
-    if not keyIsValid(myKey):
+def main(myMessage,myKey,myMode):
+    print(myKey)
+    if not keyIsValid(myKey.upper()):
         sys.exit('There is an error in the key or symbol set.')
     if myMode == 'encrypt':
         translated = encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
         translated = decryptMessage(myKey, myMessage)
-    print('Using key %s' % (myKey))
-    print('The %sed message is:' % (myMode))
+    #print('Using key %s' % (myKey))
+    #print('The %sed message is:' % (myMode))
     print(translated)
 
 
 def keyIsValid(key):
-    keyList = list(key)
     AlphabetList = list(Alphabet)
-    keyList.sort()
     AlphabetList.sort()
-
-    return keyList == AlphabetList
+    return AlphabetList
 
 
 def encryptMessage(key, message):
@@ -53,14 +44,16 @@ def translateMessage(key, message, mode):
             # Encrypt/decrypt the symbol:
             symIndex = charsA.find(symbol.upper())
             if symbol.isupper():
-                translated += charsB[symIndex].upper()
+                translated += charsA[symIndex].upper()
             else:
-                translated += charsB[symIndex].lower()
+                translated += charsA[symIndex].lower()
         else:
             # Symbol is not in Alphabet; just add it
             translated += symbol
 
-    return translated
+    #return translated
+    TestText2 = translated.encode('utf8')
+    return TestText2
 
 
 def getRandomKey():
@@ -70,4 +63,15 @@ def getRandomKey():
 
 
 if __name__ == '__main__':
-    main()
+	
+	plain_text = sys.argv[1]
+	key = sys.argv[2]
+	mode = 'encrypt'
+	
+	if (sys.argv[3] == '1'):
+		mode = 'encrypt'
+	elif (sys.argv[3] == '2'):
+		mode = 'decrypt'
+	
+	print(mode)
+	main(plain_text,key,mode)

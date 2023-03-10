@@ -140,6 +140,35 @@ public class PythonHandler {
 //		return outputStream.toString().trim();
 	}
 
+	/**
+	 * @param text
+	 * @param key
+	 * @param mode
+	 * @return
+	 * @throws ExecuteException
+	 * @throws IOException
+	 */
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(String text,
+			String key, String mode) throws ExecuteException, IOException {
+		String line = "py "
+				+ resolvePythonScriptPath("caesarCipherWithKeyword.py " + text + " " );
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		System.out.println(
+				"givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput()" + out);
+		return out;
+//		return outputStream.toString().trim();
+	}
+
 	private String resolvePythonScriptPath(String filename) {
 		File file = new File("src/main/resources/" + filename);
 		return file.getAbsolutePath();
