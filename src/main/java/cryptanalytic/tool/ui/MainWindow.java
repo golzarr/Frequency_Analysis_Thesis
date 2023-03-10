@@ -377,6 +377,18 @@ public class MainWindow {
 		txtCipherKeyword.setColumns(25);
 
 		JButton btnCaesarDecrypts = new JButton("decrypt");
+		btnCaesarDecrypts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(
+									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "2");
+					outputTextAreasSubstitution.setText(outPut);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		btnCaesarDecrypts.setBounds(373, 216, 128, 25);
 		panelSubstitutionCipherWithaKeyword.add(btnCaesarDecrypts);
 
