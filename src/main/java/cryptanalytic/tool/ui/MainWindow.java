@@ -358,7 +358,7 @@ public class MainWindow {
 
 			}
 		});
-		btnNewButtonEncryptSubstitutionCipher.setBounds(219, 216, 128, 25);
+		btnNewButtonEncryptSubstitutionCipher.setBounds(174, 293, 128, 25);
 		panelSubstitutionCipherWithaKeyword.add(btnNewButtonEncryptSubstitutionCipher);
 		// txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPanes = new JScrollPane();
@@ -389,27 +389,49 @@ public class MainWindow {
 				}
 			}
 		});
-		btnCaesarDecrypts.setBounds(373, 216, 128, 25);
+		btnCaesarDecrypts.setBounds(328, 293, 128, 25);
 		panelSubstitutionCipherWithaKeyword.add(btnCaesarDecrypts);
 
 		JLabel labels = new JLabel("plain_text / cipher_text");
-		labels.setBounds(44, 251, 156, 16);
+		labels.setBounds(44, 328, 156, 16);
 		panelSubstitutionCipherWithaKeyword.add(labels);
 
 		JLabel lblNewLabel_2sss = new JLabel("Keyword:");
-		lblNewLabel_2sss.setBounds(44, 191, 56, 16);
+		lblNewLabel_2sss.setBounds(44, 261, 56, 16);
 		panelSubstitutionCipherWithaKeyword.add(lblNewLabel_2sss);
 
 		keywordTextFieldSubstitution = new JTextField();
-		keywordTextFieldSubstitution.setBounds(101, 188, 209, 22);
+		keywordTextFieldSubstitution.setBounds(101, 258, 209, 22);
 		panelSubstitutionCipherWithaKeyword.add(keywordTextFieldSubstitution);
 
 		JScrollPane scrollPane_1ss = new JScrollPane();
-		scrollPane_1ss.setBounds(44, 272, 612, 124);
+		scrollPane_1ss.setBounds(44, 349, 612, 124);
 		panelSubstitutionCipherWithaKeyword.add(scrollPane_1ss);
 
 		outputTextAreasSubstitution = new JTextArea();
 		scrollPane_1ss.setViewportView(outputTextAreasSubstitution);
+
+		JButton btnNewButtonCipherKeywordClear = new JButton("Clear fields");
+		btnNewButtonCipherKeywordClear.setBounds(478, 293, 109, 25);
+		panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
+
+		JLabel label_1 = new JLabel("Alphabet");
+		label_1.setBounds(334, 261, 56, 16);
+		panelSubstitutionCipherWithaKeyword.add(label_1);
+
+		JComboBox comboBox_Cipher_Keyword = new JComboBox(Alphabet);
+		comboBox_Cipher_Keyword.setBounds(409, 258, 109, 22);
+		panelSubstitutionCipherWithaKeyword.add(comboBox_Cipher_Keyword);
+		comboBox_Cipher_Keyword.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				String key = comboBox_Cipher_Keyword.getItemAt(comboBox_Cipher_Keyword.getSelectedIndex()) + "";
+//				selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
+				System.out.println("MainWindow.initialize().new ItemListener() {...}.itemStateChanged(key)" + key);
+				System.out.println(
+						"MainWindow.initialize().new ItemListener() {...}.itemStateChanged(comboBox_Cipher_Keyword.getSelectedIndex())"
+								+ comboBox_Cipher_Keyword.getSelectedIndex());
+			}
+		});
 
 		/////////////////////////////////////////////////////////////////////////////////////////
 
