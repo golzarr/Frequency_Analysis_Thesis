@@ -81,7 +81,7 @@ def normalizeKey(plain_text, ALPHABET):
 
     # consider all the letters in the Key
     for c in plain_text:
-        ALPHABET= ALPHABET.replace(c, '')
+        ALPHABET= ALPHABET.replace(c, '',1)
 
     newKey_text=plain_text+ALPHABET
     return newKey_text
