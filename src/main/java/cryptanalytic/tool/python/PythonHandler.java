@@ -148,10 +148,10 @@ public class PythonHandler {
 	 * @throws IOException
 	 */
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(String text,
-			String key, String mode) throws ExecuteException, IOException {
+			String key, String mode, String alphabet) throws ExecuteException, IOException {
 
-		String line = "py " + resolvePythonScriptPath(
-				"caesarCipherWithKeyword.py " + " \"" + text + "\"" + " \"" + key + "\"" + " \"" + mode + "\"");
+		String line = "py " + resolvePythonScriptPath("caesarCipherWithKeyword.py " + " \"" + text + "\"" + " \"" + key
+				+ "\"" + " \"" + mode + "\"" + " \"" + alphabet + "\"");
 
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);

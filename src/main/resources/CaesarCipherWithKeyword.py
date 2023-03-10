@@ -1,12 +1,10 @@
-# Simple Substitution Cipher
-# https://www.nostarch.com/crackingcodes (BSD Licensed)
-
 import sys, random
 
 
-LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+LETTERS = ''
 
-def main(text,key,mode):
+def main(text,key,mode,pLetters):
+    LETTERS = pLetters
     myMessage = text
     #print(key)
     myKey=normalizeKey(key,LETTERS)
@@ -23,7 +21,9 @@ def main(text,key,mode):
     #print('Using key %s' % (myKey))
     #print('The %sed message is:' % (myMode))
     
-    print(translated)
+    TestText2 = translated.encode('utf8')
+    sys.stdout.buffer.write(TestText2)
+    #print(translated)
     
 
 def keyIsValid(key):
@@ -97,5 +97,13 @@ if __name__ == '__main__':
 		mode = 'encrypt'
 	elif (sys.argv[3] == '2'):
 		mode = 'decrypt'
+		
+	LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	
-	main(text,key,mode)
+	if (sys.argv[4] == '1'):
+		LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
+	elif (sys.argv[4] == '2'):
+		LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
+	
+	
+	main(text,key,mode,LETTERS)

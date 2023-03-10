@@ -45,6 +45,7 @@ public class MainWindow {
 	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
 	private JComboBox comboBox;
 	private JComboBox comboBoxFA;
+	private JComboBox comboBox_Cipher_Keyword;
 	private JTextField textFieldPlotFAFile;
 	private JTextField textFieldLetterFAFile;
 	private JTextField keywordTextFieldSubstitution;
@@ -350,7 +351,8 @@ public class MainWindow {
 				try {
 					String outPut = pythonHandler
 							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(
-									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "1");
+									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "1",
+									comboBox_Cipher_Keyword.getSelectedIndex() + "");
 					outputTextAreasSubstitution.setText(outPut);
 				} catch (Exception e2) {
 					e2.printStackTrace();
@@ -382,7 +384,8 @@ public class MainWindow {
 				try {
 					String outPut = pythonHandler
 							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(
-									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "2");
+									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "2",
+									comboBox_Cipher_Keyword.getSelectedIndex() + "");
 					outputTextAreasSubstitution.setText(outPut);
 				} catch (Exception e2) {
 					e2.printStackTrace();
@@ -419,7 +422,7 @@ public class MainWindow {
 		label_1.setBounds(334, 261, 56, 16);
 		panelSubstitutionCipherWithaKeyword.add(label_1);
 
-		JComboBox comboBox_Cipher_Keyword = new JComboBox(Alphabet);
+		comboBox_Cipher_Keyword = new JComboBox(Alphabet);
 		comboBox_Cipher_Keyword.setBounds(409, 258, 109, 22);
 		panelSubstitutionCipherWithaKeyword.add(comboBox_Cipher_Keyword);
 		comboBox_Cipher_Keyword.addItemListener(new ItemListener() {
