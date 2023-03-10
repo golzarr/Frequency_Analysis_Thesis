@@ -1,10 +1,20 @@
+# Simple Substitution Cipher
+# https://www.nostarch.com/crackingcodes (BSD Licensed)
+
 import sys, random
 
-Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-def main(myMessage,myKey,myMode):
-    print(myKey)
-    if not keyIsValid(myKey.upper()):
+LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+def main(text,key,mode):
+    myMessage = text
+    #print(key)
+    myKey=normalizeKey(key,LETTERS)
+    myMode = mode
+    #print(text)
+    #print(myKey)
+    #print(mode)
+    if not keyIsValid(myKey):
         sys.exit('There is an error in the key or symbol set.')
     if myMode == 'encrypt':
         translated = encryptMessage(myKey, myMessage)
@@ -12,13 +22,17 @@ def main(myMessage,myKey,myMode):
         translated = decryptMessage(myKey, myMessage)
     #print('Using key %s' % (myKey))
     #print('The %sed message is:' % (myMode))
+    
     print(translated)
-
+    
 
 def keyIsValid(key):
-    AlphabetList = list(Alphabet)
-    AlphabetList.sort()
-    return AlphabetList
+    keyList = list(key)
+    lettersList = list(LETTERS)
+    keyList.sort()
+    lettersList.sort()
+
+    return keyList == lettersList
 
 
 def encryptMessage(key, message):
@@ -31,11 +45,11 @@ def decryptMessage(key, message):
 
 def translateMessage(key, message, mode):
     translated = ''
-    charsA = Alphabet
+    charsA = LETTERS
     charsB = key
     if mode == 'decrypt':
         # For decrypting, we can use the same code as encrypting. We
-        # just need to swap where the key and Alphabet strings are used.
+        # just need to swap where the key and LETTERS strings are used.
         charsA, charsB = charsB, charsA
 
     # Loop through each symbol in message:
@@ -44,27 +58,38 @@ def translateMessage(key, message, mode):
             # Encrypt/decrypt the symbol:
             symIndex = charsA.find(symbol.upper())
             if symbol.isupper():
-                translated += charsA[symIndex].upper()
+                translated += charsB[symIndex].upper()
             else:
-                translated += charsA[symIndex].lower()
+                translated += charsB[symIndex].lower()
         else:
-            # Symbol is not in Alphabet; just add it
+            # Symbol is not in LETTERS; just add it
             translated += symbol
 
-    #return translated
-    TestText2 = translated.encode('utf8')
-    return TestText2
+    return translated
 
 
 def getRandomKey():
-    key = list(Alphabet)
+    key = list(LETTERS)
     random.shuffle(key)
     return ''.join(key)
 
 
+def normalizeKey(plain_text, ALPHABET):
+    newKey_text = ''
+    # we make the algorithm case insensitive
+    plain_text = plain_text.upper()
+
+    # consider all the letters in the Key
+    for c in plain_text:
+        ALPHABET= ALPHABET.replace(c, '')
+
+    newKey_text=plain_text+ALPHABET
+    return newKey_text
+
+
 if __name__ == '__main__':
 	
-	plain_text = sys.argv[1]
+	text = sys.argv[1]
 	key = sys.argv[2]
 	mode = 'encrypt'
 	
@@ -73,5 +98,4 @@ if __name__ == '__main__':
 	elif (sys.argv[3] == '2'):
 		mode = 'decrypt'
 	
-	print(mode)
-	main(plain_text,key,mode)
+	main(text,key,mode)

@@ -3,7 +3,6 @@ package cryptanalytic.tool.python;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
@@ -150,8 +149,9 @@ public class PythonHandler {
 	 */
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(String text,
 			String key, String mode) throws ExecuteException, IOException {
-		String line = "py "
-				+ resolvePythonScriptPath("caesarCipherWithKeyword.py " + text + " " );
+
+		String line = "py " + resolvePythonScriptPath(
+				"caesarCipherWithKeyword.py " + " \"" + text + "\"" + " \"" + key + "\"" + " \"" + mode + "\"");
 
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -163,8 +163,6 @@ public class PythonHandler {
 
 		int exitCode = executor.execute(cmdLine);
 		String out = new String(outputStream.toByteArray(), "UTF-8");
-		System.out.println(
-				"givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput()" + out);
 		return out;
 //		return outputStream.toString().trim();
 	}
