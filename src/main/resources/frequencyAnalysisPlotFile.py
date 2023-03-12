@@ -29,6 +29,23 @@ def plot_distribution(frequencies):
     plt.show()
 
 
+def readFilesContent(pFiles):
+    splits = pFiles.split(';')
+
+    #for loop to iterate over words array
+    output=''
+    for split in splits:
+        text_file = open(split, "r", encoding='utf-8')
+        #read whole file to a string
+        data = text_file.read()
+        #close file
+        text_file.close()
+        output = output + ' ' +data 
+
+    return output
+
+
+
 if __name__ == '__main__':
     #plain_text = sys.argv[1]
     #freq = frequency_analysis(plain_text)
@@ -42,15 +59,16 @@ if __name__ == '__main__':
 
 	
 	
-	text_file = open(sys.argv[1], "r", encoding='utf-8')
+	#text_file = open(sys.argv[1], "r", encoding='utf-8')
+	plain_text = readFilesContent(sys.argv[1])
  
 	#read whole file to a string
-	data = text_file.read()
+	#data = text_file.read()
  
 	#close file
-	text_file.close()
+	#text_file.close()
 	
 	
-	plain_text = data
+	#plain_text = data
 	freq = frequency_analysis(plain_text,LETTERS)
 	plot_distribution(freq)

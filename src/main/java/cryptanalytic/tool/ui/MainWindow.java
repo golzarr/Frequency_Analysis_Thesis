@@ -26,6 +26,7 @@ import javax.swing.text.PlainDocument;
 
 import cryptanalytic.tool.python.PythonHandler;
 import cryptanalytic.tool.ui.util.FileHandlerThesis;
+import cryptanalytic.tool.ui.util.JFileChooserHandler;
 import cryptanalytic.tool.ui.util.StockPublicNotesDocumentFilter;
 
 public class MainWindow {
@@ -262,15 +263,17 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					rdbtnNewRadioButtonPlotFAFile.setSelected(true);
-					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-					jfc.setDialogTitle("Select an text file");
-					jfc.setAcceptAllFileFilterUsed(false);
-					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
-					jfc.addChoosableFileFilter(filter);
-					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
-					if (returnValue == JFileChooser.APPROVE_OPTION) {
-						textFieldPlotFAFile.setText(jfc.getSelectedFile().getPath());
-					}
+//					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+//					jfc.setDialogTitle("Select an text file");
+//					jfc.setAcceptAllFileFilterUsed(false);
+//					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+//					jfc.addChoosableFileFilter(filter);
+//					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
+//					if (returnValue == JFileChooser.APPROVE_OPTION) {
+//						textFieldPlotFAFile.setText(jfc.getSelectedFile().getPath());
+//					}
+					String files = JFileChooserHandler.maximunFiles(frmFrequencyAnalysisV);
+					textFieldPlotFAFile.setText(files);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -600,25 +603,26 @@ public class MainWindow {
 							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "File must be selected");
 							return;
 						}
-						boolean isEmpty = FileHandlerThesis.isFileEmpty(textFieldPlotFAFile.getText());
-						if (!isEmpty) {
-							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is empty");
-							return;
-						}
-						int i = FileHandlerThesis.validateCharacters(textFieldPlotFAFile.getText());
-						if (i == 0) {
-							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is not having content");
-							return;
-						} else if (i == 1) {
-							JOptionPane.showMessageDialog(frmFrequencyAnalysisV,
-									"File is having more than 10000 Characters");
-							return;
-						} else if (i == 2) {
-							String outPut = pythonHandler
-									.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(
-											textFieldPlotFAFile.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
-						}
-
+//						boolean isEmpty = FileHandlerThesis.isFileEmpty(textFieldPlotFAFile.getText());
+//						if (!isEmpty) {
+//							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is empty");
+//							return;
+//						}
+//						int i = FileHandlerThesis.validateCharacters(textFieldPlotFAFile.getText());
+//						if (i == 0) {
+//							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is not having content");
+//							return;
+//						} else if (i == 1) {
+//							JOptionPane.showMessageDialog(frmFrequencyAnalysisV,
+//									"File is having more than 10000 Characters");
+//							return;
+//						} else if (i == 2) {
+//							String outPut = pythonHandler
+//									.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(
+//											textFieldPlotFAFile.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
+//						}
+						String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(
+								textFieldPlotFAFile.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();

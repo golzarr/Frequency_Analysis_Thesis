@@ -79,7 +79,7 @@ public class PythonHandler {
 		String line = "py "
 				+ resolvePythonScriptPath("frequencyAnalysisPlotFile.py" + " \"" + text + " \"" + " " + alphabet);
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
-//		System.out.println(line);
+		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
