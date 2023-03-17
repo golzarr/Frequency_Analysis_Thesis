@@ -20,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.PlainDocument;
@@ -39,8 +41,8 @@ public class MainWindow {
 	private JTextArea txtrPlotFA;
 	private JTextArea txtrLetter;
 	private JTextArea txtrLetterOutPut;
-	private JTextArea outputTextAreass;
-	private JTextArea outputTextAreasSubstitution;
+	private JTextArea outputTextAreasCipherKeywordFA;
+	private JTextArea outputTextAreaSubstitution;
 	private JTextArea txtCipherKeyword;
 	private PythonHandler pythonHandler = new PythonHandler();
 	private String[] defaultKeys = { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
@@ -50,6 +52,7 @@ public class MainWindow {
 	private JTextField textFieldPlotFAFile;
 	private JTextField textFieldLetterFAFile;
 	private JTextField keywordTextFieldSubstitution;
+	private JTextArea textAreaCipherKeyword;
 
 	/**
 	 * Launch the application.
@@ -124,6 +127,20 @@ public class MainWindow {
 		JPanel panelFA = new JPanel();
 		tabbedPane.addTab("Cracking Caesar-Cipher with Frequency Analysis", null, panelFA, null);
 		panelFA.setLayout(null);
+		ChangeListener changeListener = new ChangeListener() {
+			public void stateChanged(ChangeEvent changeEvent) {
+				JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+				int index = sourceTabbedPane.getSelectedIndex();
+				System.out.println("Tab changed to: " + sourceTabbedPane.getTitleAt(index));
+				System.out.println("Tab changed to index " + index);
+				if (index == 5) {
+					if (outputTextAreaSubstitution.getText().trim().length() > 0) {
+						textAreaCipherKeyword.setText(outputTextAreaSubstitution.getText().trim());
+					}
+				}
+			}
+		};
+		tabbedPane.addChangeListener(changeListener);
 
 		JLabel lblNewLabel_2 = new JLabel("Cipher Text");
 		lblNewLabel_2.setBounds(42, 24, 110, 16);
@@ -356,7 +373,7 @@ public class MainWindow {
 							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(
 									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "1",
 									comboBox_Cipher_Keyword.getSelectedIndex() + "");
-					outputTextAreasSubstitution.setText(outPut);
+					outputTextAreaSubstitution.setText(outPut);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
@@ -389,7 +406,7 @@ public class MainWindow {
 							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(
 									txtCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "2",
 									comboBox_Cipher_Keyword.getSelectedIndex() + "");
-					outputTextAreasSubstitution.setText(outPut);
+					outputTextAreaSubstitution.setText(outPut);
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
@@ -414,8 +431,8 @@ public class MainWindow {
 		scrollPane_1ss.setBounds(44, 349, 612, 124);
 		panelSubstitutionCipherWithaKeyword.add(scrollPane_1ss);
 
-		outputTextAreasSubstitution = new JTextArea();
-		scrollPane_1ss.setViewportView(outputTextAreasSubstitution);
+		outputTextAreaSubstitution = new JTextArea();
+		scrollPane_1ss.setViewportView(outputTextAreaSubstitution);
 
 		JButton btnNewButtonCipherKeywordClear = new JButton("Clear fields");
 		btnNewButtonCipherKeywordClear.setBounds(478, 293, 109, 25);
@@ -458,10 +475,23 @@ public class MainWindow {
 		scrollPaness.setBounds(44, 62, 612, 124);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(scrollPaness);
 
-		JTextArea textAreas = new JTextArea();
-		scrollPaness.setViewportView(textAreas);
+		textAreaCipherKeyword = new JTextArea();
+		scrollPaness.setViewportView(textAreaCipherKeyword);
 
 		JButton btnDecrypts = new JButton("decrypt");
+		btnDecrypts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCipherKeywordFADirectInput(
+									textAreaCipherKeyword.getText(), keywordTextFieldSubstitution.getText(), "2",
+									comboBox_Cipher_Keyword.getSelectedIndex() + "");
+					outputTextAreasCipherKeywordFA.setText(outPut);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		btnDecrypts.setBounds(280, 216, 128, 25);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(btnDecrypts);
 
@@ -481,8 +511,8 @@ public class MainWindow {
 		scrollPane_1sss.setBounds(44, 272, 612, 124);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(scrollPane_1sss);
 
-		outputTextAreass = new JTextArea();
-		scrollPane_1sss.setViewportView(outputTextAreass);
+		outputTextAreasCipherKeywordFA = new JTextArea();
+		scrollPane_1sss.setViewportView(outputTextAreasCipherKeywordFA);
 
 		btnNewButtonLetterFAFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -1,6 +1,6 @@
 # we need the alphabet because we convert letters into numerical values to be
 # able to use mathematical operations (note we encrypt the spaces as well)
-ALPHABET = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 def crack_caesar(cipher_text):
@@ -20,6 +20,6 @@ def crack_caesar(cipher_text):
 
 
 if __name__ == '__main__':
-    encrypted = 'VJKUBKUBCBOGUUCIG'
+    encrypted = 'cey jeiia seii ke a nfnie'
     crack_caesar(encrypted)
 

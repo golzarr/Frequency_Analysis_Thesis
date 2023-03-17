@@ -171,4 +171,26 @@ public class PythonHandler {
 		File file = new File("src/main/resources/" + filename);
 		return file.getAbsolutePath();
 	}
+
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCipherKeywordFADirectInput(String text,
+			String key, String mode, String alphabet) throws ExecuteException, IOException {
+
+		//for now 
+		mode = "1";
+		alphabet = "0";
+		String line = "py " + resolvePythonScriptPath("frequencyAnalysisSubstitutionCipherFA.py " + " \"" + text + "\""
+				+ " \"" + mode + "\"" + " \"" + alphabet + "\"");
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		return out;
+	}
 }
