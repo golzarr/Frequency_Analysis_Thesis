@@ -2,7 +2,7 @@ import matplotlib.pylab as plt
 
 # these are the letters we are interested in when dealing with frequency-analysis
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
+letters_frequency = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
 
 # the method to do frequency analysis: we just count the occurrences of the given characters
 def frequency_analysis(text):
@@ -41,11 +41,19 @@ def crack(text):
     print(LETTERS.find('E'))
     print("The possible key value: %s" % (LETTERS.find(freq[0][0]) -
                                           LETTERS.find('E')))
+                                          
+    text = text.upper()
     out=''
     for i in range(len(LETTERS)):
        #print(LETTERS[i])
        out+=str(freq[i][0] +'-'+ str(freq[i][1])+"\n")
+       print(freq[i][0])
+       print(letters_frequency[i])
+       if(freq[i][1] > 0):
+          text = text.replace(freq[i][0],letters_frequency[i])
+       
+       print("Possible Value: "+text)
     print(out)
 if __name__ == '__main__':
-    cipher_text = 'cey jeiia seii ke mle nfnie'
+    cipher_text = 'jeiia seii ke mle nfnie'
     crack(cipher_text)
