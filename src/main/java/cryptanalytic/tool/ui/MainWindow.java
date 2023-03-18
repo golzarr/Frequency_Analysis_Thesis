@@ -172,9 +172,14 @@ public class MainWindow {
 		lblNewLabel_Cracked_Text.setBounds(42, 300, 110, 16);
 		panelFA.add(lblNewLabel_Cracked_Text);
 
-		JButton btnNewButtonCrack = new JButton("Crack");
-		btnNewButtonCrack.setBounds(301, 225, 97, 25);
-		panelFA.add(btnNewButtonCrack);
+	//	JButton btnNewButtonCrack = new JButton("Crack");
+	//	btnNewButtonCrack.setBounds(301, 225, 97, 25);
+	//	panelFA.add(btnNewButtonCrack);
+		
+		JButton btnNewButtonCrackTest = new JButton("Crack Test");
+		btnNewButtonCrackTest.setBounds(301, 225, 97, 25);
+		panelFA.add(btnNewButtonCrackTest);
+		
     //	txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPane2 = new JScrollPane();
 		scrollPane2.setBounds(42, 53, 612, 98);
@@ -650,8 +655,25 @@ panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 				}
 			}
 		});
+		
+		
+		btnNewButtonCrackTest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String key = comboBox.getItemAt(comboBoxFA.getSelectedIndex()) + "";
+				try {
+					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess("1",
+							txtrOut.getText(), key);
+					comboBoxFA.setSelectedItem(outPut);
+					outputTextAreaSubstitutionA.setText(outPut);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 
-		btnNewButtonCrack.addActionListener(new ActionListener() {
+		btnNewButtonCrackTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBoxFA.getItemAt(comboBoxFA.getSelectedIndex()) + "";
 				try {
