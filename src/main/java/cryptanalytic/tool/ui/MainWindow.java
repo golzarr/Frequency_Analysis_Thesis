@@ -38,6 +38,7 @@ public class MainWindow {
 	private JTextArea txtr;
 	private JTextArea txtrOut;
 	private JTextArea txtrFA;
+	private JTextArea outputTextAreaSubstitutionA;
 	private JTextArea txtrPlotFA;
 	private JTextArea txtrLetter;
 	private JTextArea txtrLetterOutPut;
@@ -124,9 +125,12 @@ public class MainWindow {
 		JLabel label = new JLabel("plain_text / cipher_text");
 		label.setBounds(44, 271, 156, 16);
 		panel.add(label);
+		
 		JPanel panelFA = new JPanel();
 		tabbedPane.addTab("Cracking Caesar-Cipher with Frequency Analysis", null, panelFA, null);
 		panelFA.setLayout(null);
+		
+		
 		ChangeListener changeListener = new ChangeListener() {
 			public void stateChanged(ChangeEvent changeEvent) {
 				JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
@@ -140,16 +144,38 @@ public class MainWindow {
 				}
 			}
 		};
+		
+		
+		ChangeListener changeListenerCrackingCaesarCipherWithFrequencyAnalysis = new ChangeListener() {
+			public void stateChanged(ChangeEvent changeEvent) {
+				JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+				int index = sourceTabbedPane.getSelectedIndex();
+				System.out.println("Tab changed to: " + sourceTabbedPane.getTitleAt(index));
+				System.out.println("Tab changed to index " + index);
+				if (index == 1) {
+					if (txtrOut.getText().trim().length() > 0) {
+						txtrFA.setText(txtrOut.getText().trim());
+					}
+				}
+			}
+		};
+		
+		
 		tabbedPane.addChangeListener(changeListener);
+		tabbedPane.addChangeListener(changeListenerCrackingCaesarCipherWithFrequencyAnalysis);
 
 		JLabel lblNewLabel_2 = new JLabel("Cipher Text");
 		lblNewLabel_2.setBounds(42, 24, 110, 16);
 		panelFA.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_Cracked_Text = new JLabel("Cracked Text");
+		lblNewLabel_Cracked_Text.setBounds(42, 300, 110, 16);
+		panelFA.add(lblNewLabel_Cracked_Text);
 
 		JButton btnNewButtonCrack = new JButton("Crack");
 		btnNewButtonCrack.setBounds(301, 225, 97, 25);
 		panelFA.add(btnNewButtonCrack);
-//		txtr.setBounds(43, 104, 98, 98);
+    //	txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPane2 = new JScrollPane();
 		scrollPane2.setBounds(42, 53, 612, 98);
 		panelFA.add(scrollPane2);
@@ -157,9 +183,19 @@ public class MainWindow {
 		txtrFA = new JTextArea();
 		txtrFA.setRows(25);
 		txtrFA.setColumns(25);
+	//	txtrFA.setText("Some text to display in the JTextArea");
 		scrollPane2.setViewportView(txtrFA);
 		// panel.add(txtr);
 		txtrFA.setLineWrap(true);
+		
+		outputTextAreaSubstitutionA = new JTextArea();
+		outputTextAreaSubstitutionA.setBounds(43, 324, 607, 100);
+	//	outputTextAreaSubstitution.setText("Some text to display in the JTextArea");
+		panelFA.add(outputTextAreaSubstitutionA);
+		
+		
+		
+
 
 		JLabel lblNewLabel = new JLabel("Alphabet");
 		lblNewLabel.setBounds(42, 171, 63, 16);
@@ -179,6 +215,7 @@ public class MainWindow {
 		txtrOut = new JTextArea();
 		txtrOut.setRows(25);
 		txtrOut.setColumns(25);
+//		txtrOut.setText("Some text to display in the JTextArea");
 
 		scrollPane_1.setViewportView(txtrOut);
 		// panel.add(txtr);
@@ -196,13 +233,13 @@ public class MainWindow {
 		panel.add(lblNewLabel_3);
 
 		comboBoxFA = new JComboBox(defaultKeys);
-		comboBoxFA.setBounds(157, 325, 72, 22);
+		comboBoxFA.setBounds(157, 225, 72, 22);
 //		comboBoxFA.setSelectedItem("3");
 		comboBoxFA.setSelectedIndex(-1);
 		panelFA.add(comboBoxFA);
 
 		JLabel lblNewLabel_4 = new JLabel("The Key Value is");
-		lblNewLabel_4.setBounds(48, 328, 110, 16);
+		lblNewLabel_4.setBounds(42, 228, 110, 16);
 		panelFA.add(lblNewLabel_4);
 
 		JPanel panelPlot = new JPanel();
@@ -355,7 +392,6 @@ public class MainWindow {
 		btnNewButtonLetterFAFile.setBounds(44, 230, 97, 25);
 		panelFALetters.add(btnNewButtonLetterFAFile);
 
-		// panelSubstitutionCipherWithaKeyword
 
 		JPanel panelSubstitutionCipherWithaKeyword = new JPanel();
 		tabbedPane.addTab("Substitution Cipher With a Keyword", null, panelSubstitutionCipherWithaKeyword, null);
@@ -432,6 +468,7 @@ public class MainWindow {
 		panelSubstitutionCipherWithaKeyword.add(scrollPane_1ss);
 
 		outputTextAreaSubstitution = new JTextArea();
+	//	outputTextAreaSubstitution.setText("Some text to display in the JTextArea");
 		scrollPane_1ss.setViewportView(outputTextAreaSubstitution);
 
 		JButton btnNewButtonCipherKeywordClear = new JButton("Clear fields");
@@ -475,10 +512,10 @@ public class MainWindow {
 		scrollPaness.setBounds(44, 62, 612, 124);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(scrollPaness);
 
-		textAreaCipherKeyword = new JTextArea();
+		textAreaCipherKeyword = new JTextArea();    //Cracking Substitution Cipher With a Keyword Using Frequency Analysis first TextArea
 		scrollPaness.setViewportView(textAreaCipherKeyword);
 
-		JButton btnDecrypts = new JButton("decrypt");
+		JButton btnDecrypts = new JButton("crack");
 		btnDecrypts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -568,6 +605,23 @@ public class MainWindow {
 		});
 		btnNewButtonLetterFA.setBounds(387, 279, 123, 25);
 		panelFALetters.add(btnNewButtonLetterFA);
+		
+		
+		
+		
+		//	JButton btnNewButtonSubstitutionCipherWithaKeyword = new JButton("Clear Fields");
+		btnNewButtonCipherKeywordClear.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		outputTextAreaSubstitution.setText("");
+		txtCipherKeyword.setText("");
+		keywordTextFieldSubstitution.setText("");
+	}
+});
+		//		btnNewButtonCipherKeywordClear.setBounds(387, 279, 123, 25);
+panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
+		
+		
+		
 
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
