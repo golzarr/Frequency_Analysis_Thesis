@@ -35,6 +35,7 @@ def crack(text):
     freq = frequency_analysis(text)
     print(freq)
     freq = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+    print(freq)
     print(freq[0][0])
     print(freq[1][0])
     print(LETTERS.find(freq[0][0]))
@@ -46,7 +47,7 @@ def crack(text):
     out=''
     for i in range(len(LETTERS)):
        #print(LETTERS[i])
-       out+=str(freq[i][0] +'-'+ str(freq[i][1])+"\n")
+       out+=str(freq[i][0] +'-'+ str(freq[i][1])+";")
        print(freq[i][0])
        print(letters_frequency[i])
        if(freq[i][1] > 0):
