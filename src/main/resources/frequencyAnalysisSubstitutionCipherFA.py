@@ -67,7 +67,7 @@ if __name__ == '__main__':
 	
 	if (sys.argv[3] == '1'):
 		LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
-		letters_frequency = 'AOESNITRVLKDMCUPZYHJGFBQWX'
+		letters_frequency = 'OEANTIVLSRDKUPÍMCHÁZYJBŘÊÉĈŽÝŜŨGFÚŇWĎÓXŤQÚVWXÝZŽ'
 	elif (sys.argv[3] == '2'):
 		LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 		letters_frequency = 'EAOSRNIDLCTUMPBGYÍVQÓHFZJÉÁÑXÚÜWK'
