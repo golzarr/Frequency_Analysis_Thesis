@@ -12,8 +12,8 @@ def main(text,key,mode,pLetters):
     #print(text)
     #print(myKey)
     #print(mode)
-    if not keyIsValid(myKey):
-        sys.exit('There is an error in the key or symbol set.')
+    #if not keyIsValid(myKey):
+    #    sys.exit('There is an error in the key or symbol set.')
     if myMode == 'encrypt':
         translated = encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
@@ -78,13 +78,21 @@ def normalizeKey(plain_text, ALPHABET):
     newKey_text = ''
     # we make the algorithm case insensitive
     plain_text = plain_text.upper()
-
+    #print(plain_text)
+    #print(ALPHABET)
     # consider all the letters in the Key
     for c in plain_text:
         ALPHABET= ALPHABET.replace(c, '',1)
 
     newKey_text=plain_text+ALPHABET
-    return newKey_text
+    
+    Tofix = newKey_text
+
+    while(len(Tofix) > len(LETTERS)):
+        Tofix = Tofix[:-1]
+    
+    #print(Tofix)
+    return Tofix
 
 
 if __name__ == '__main__':
