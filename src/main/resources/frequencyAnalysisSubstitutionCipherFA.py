@@ -3,7 +3,7 @@ import sys
 
 # these are the letters we are interested in when dealing with frequency-analysis
 LETTERS = ''
-letters_frequency = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+letters_frequency = ''
 
 # the method to do frequency analysis: we just count the occurrences of the given characters
 def frequency_analysis(text):
@@ -67,8 +67,10 @@ if __name__ == '__main__':
 	
 	if (sys.argv[3] == '1'):
 		LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
+		letters_frequency = 'AOESNITRVLKDMCUPZYHJGFBQWX'
 	elif (sys.argv[3] == '2'):
 		LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
+		letters_frequency = 'EAOSRNIDLCTUMPBGYÍVQÓHFZJÉÁÑXÚÜWK'
 
 	#cipher_text = 'cey jeiia seii ke mle nfnie'
 	crack(text)
