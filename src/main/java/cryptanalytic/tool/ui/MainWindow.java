@@ -84,7 +84,7 @@ public class MainWindow {
 	private void initialize() {
 		frmFrequencyAnalysisV = new JFrame();
 		frmFrequencyAnalysisV.setTitle("Frequency Analysis v1.0");
-		frmFrequencyAnalysisV.setBounds(100, 100, 736, 581);
+		frmFrequencyAnalysisV.setBounds(100, 100, 836, 581);
 		frmFrequencyAnalysisV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFrequencyAnalysisV.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 
@@ -120,11 +120,14 @@ public class MainWindow {
 
 		JButton btnCaesarDecrypt = new JButton("caesar_decrypt");
 		btnCaesarDecrypt.setBounds(373, 216, 128, 25);
-		panel.add(btnCaesarDecrypt);
+	//	panel.add(btnCaesarDecrypt);
+
 
 		JLabel label = new JLabel("plain_text / cipher_text");
 		label.setBounds(44, 271, 156, 16);
 		panel.add(label);
+		
+
 		
 		JPanel panelFA = new JPanel();
 		tabbedPane.addTab("Cracking Caesar-Cipher with Frequency Analysis", null, panelFA, null);
@@ -248,7 +251,7 @@ public class MainWindow {
 		panelFA.add(lblNewLabel_4);
 
 		JPanel panelPlot = new JPanel();
-		tabbedPane.addTab("Plot Distribution FA", null, panelPlot, null);
+		tabbedPane.addTab("Plot Distribution Frequency Analysis", null, panelPlot, null);
 		panelPlot.setLayout(null);
 
 		JLabel lblNewLabelFA = new JLabel("Frequency Analysis");
@@ -358,6 +361,27 @@ public class MainWindow {
 		});
 		btnNewButtonPlotFA.setBounds(368, 396, 132, 25);
 		panelPlot.add(btnNewButtonPlotFA);
+		
+		JPanel panelVigenere = new JPanel();
+		JTextArea textAreaVigenere = new JTextArea(5, 20); // Adjust rows and columns as needed
+		JTextArea textAreaSecondVigenere = new JTextArea(5, 20); // Adjust rows and columns as needed
+		JTextField keywordTextFieldVigenere = new JTextField();     
+		JComboBox comboBox_Vigenere_Cipher = new JComboBox(Alphabet);
+		
+		JButton btnNewButtonVigenereCipher = new JButton("Clear Fields");
+		btnNewButtonVigenereCipher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaVigenere.setText("");
+				keywordTextFieldVigenere.setText("");
+				textAreaSecondVigenere.setText("");
+				comboBox_Vigenere_Cipher.setSelectedIndex(0);
+
+			}
+		});
+		btnNewButtonVigenereCipher.setBounds(528, 256, 132, 25);
+		panelVigenere.add(btnNewButtonVigenereCipher);
+		
+		
 
 		JPanel panelFALetters = new JPanel();
 		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
@@ -421,6 +445,26 @@ public class MainWindow {
 
 			}
 		});
+		                                             //VIGENER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		JButton btnNewButtonEncryptVigenereCipher = new JButton("Encrypt");
+		btnNewButtonEncryptVigenereCipher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccessVigenereCipher(
+									textAreaVigenere.getText(), keywordTextFieldVigenere.getText(), "1",
+									comboBox_Cipher_Keyword.getSelectedIndex() + "");
+					textAreaSecondVigenere.setText(outPut);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+
+			}
+		});
+		
+		
+		
+		
 		btnNewButtonEncryptSubstitutionCipher.setBounds(174, 293, 128, 25);
 		panelSubstitutionCipherWithaKeyword.add(btnNewButtonEncryptSubstitutionCipher);
 		// txtr.setBounds(43, 104, 98, 98);
@@ -495,6 +539,22 @@ public class MainWindow {
 				System.out.println(
 						"MainWindow.initialize().new ItemListener() {...}.itemStateChanged(comboBox_Cipher_Keyword.getSelectedIndex())"
 								+ comboBox_Cipher_Keyword.getSelectedIndex());
+			}
+		});
+		
+
+		
+		
+		comboBox_Vigenere_Cipher.setBounds(409, 308, 109, 22);
+		panelVigenere.add(comboBox_Cipher_Keyword);
+		comboBox_Vigenere_Cipher.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				String key = comboBox_Vigenere_Cipher.getItemAt(comboBox_Vigenere_Cipher.getSelectedIndex()) + "";
+//				selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
+				System.out.println("MainWindow.initialize().new ItemListener() {...}.itemStateChanged(key)" + key);
+				System.out.println(
+						"MainWindow.initialize().new ItemListener() {...}.itemStateChanged(comboBox_Vigenere_Cipher.getSelectedIndex())"
+								+ comboBox_Vigenere_Cipher.getSelectedIndex());
 			}
 		});
 
@@ -574,6 +634,26 @@ public class MainWindow {
 				}
 			}
 		});
+		
+		JButton btnNewButtonVigenereCipher2 = new JButton("File");
+		btnNewButtonVigenereCipher2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					btnNewButtonVigenereCipher2.setSelected(true);
+					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+					jfc.setDialogTitle("Select an text file");
+					jfc.setAcceptAllFileFilterUsed(false);
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+					jfc.addChoosableFileFilter(filter);
+					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
+					if (returnValue == JFileChooser.APPROVE_OPTION) {
+						textFieldLetterFAFile.setText(jfc.getSelectedFile().getPath());
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		textFieldLetterFAFile = new JTextField();
 		textFieldLetterFAFile.setEditable(false);
@@ -611,10 +691,91 @@ public class MainWindow {
 		btnNewButtonLetterFA.setBounds(387, 279, 123, 25);
 		panelFALetters.add(btnNewButtonLetterFA);
 		
+
+		tabbedPane.addTab("Vigenere Cipher", null, panelVigenere, null);
+		panelVigenere.setLayout(null);
+		
+		JLabel lblNewLabelVigenereAlphabet = new JLabel("Alphabet");
+		lblNewLabelVigenereAlphabet.setBounds(352, 261, 63, 16);
+		panelVigenere.add(lblNewLabelVigenereAlphabet);
+
+	
 		
 		
+		JLabel lblNewLabel_Vigenere = new JLabel("Keyword:");
+		lblNewLabel_Vigenere.setBounds(44, 211, 56, 16);
+		panelVigenere.add(lblNewLabel_Vigenere);
 		
-		//	JButton btnNewButtonSubstitutionCipherWithaKeyword = new JButton("Clear Fields");
+		
+		keywordTextFieldVigenere.setBounds(101, 211, 209, 22);
+		panelVigenere.add(keywordTextFieldVigenere);
+
+		btnNewButtonVigenereCipher2.setBounds(44, 270, 97, 25);
+		panelVigenere.add(btnNewButtonVigenereCipher2);
+		
+		
+		btnNewButtonEncryptVigenereCipher.setBounds(204, 270, 117, 25);
+		panelVigenere.add(btnNewButtonEncryptVigenereCipher);
+		
+		
+
+		textAreaVigenere.setLineWrap(true);
+		textAreaVigenere.setWrapStyleWord(true);
+		int x = 60; // X position
+		int y = 80; // Y position
+		int width = 700; // Width
+		int height = 100; // Height
+		textAreaVigenere.setBounds(x, y, width, height);
+		panelVigenere.add(textAreaVigenere);
+		
+	/*	
+		JTextField keywordTextFieldVigenere = new JTextField();
+		keywordTextFieldVigenere.setBounds(51, 88, 709, 120);
+		panelVigenere.add(keywordTextFieldVigenere);
+		
+		*/
+		
+		/*	
+		
+		JTextField keywordTextFieldSecondVigenere = new JTextField();
+		keywordTextFieldSecondVigenere.setBounds(51, 288, 709, 120);
+		panelVigenere.add(keywordTextFieldSecondVigenere);
+
+		*/
+		
+		
+		textAreaSecondVigenere.setLineWrap(true);
+		textAreaSecondVigenere.setWrapStyleWord(true);
+		int textAreaSecondVigenereX = 60; // X position
+		int textAreaSecondVigenereY = 350; // Y position
+		int textAreaSecondVigenereWidth = 700; // Width
+		int textAreaSecondVigenereHeight = 100; // Height
+		textAreaSecondVigenere.setBounds(textAreaSecondVigenereX, textAreaSecondVigenereY, textAreaSecondVigenereWidth, textAreaSecondVigenereHeight);
+		panelVigenere.add(textAreaSecondVigenere);
+		
+		JRadioButton rdbtnNewRadioButtonFirstPlotVigenere = new JRadioButton("Direct Input Text");
+		rdbtnNewRadioButtonFirstPlotVigenere.setBounds(39, 55, 280, 25);
+		panelVigenere.add(rdbtnNewRadioButtonFirstPlotVigenere);
+		
+		JRadioButton rdbtnNewRadioButtonSecondPlotVigenere = new JRadioButton("Reading a Text File");
+		rdbtnNewRadioButtonSecondPlotVigenere.setBounds(39, 246, 174, 25);
+		panelVigenere.add(rdbtnNewRadioButtonSecondPlotVigenere);
+		
+		
+		JLabel lblNewLabelVigenere = new JLabel("plain_text (Enter characters without spaces)");
+		lblNewLabelVigenere.setBounds(44, 31, 356, 16);
+		panelVigenere.add(lblNewLabelVigenere);
+		
+		JLabel lblNewLabelSecondVigenere = new JLabel("cipher_text");
+		lblNewLabelSecondVigenere.setBounds(44, 321, 156, 16);
+		panelVigenere.add(lblNewLabelSecondVigenere);
+
+		
+		JPanel panelCrackingVigenere = new JPanel();
+		tabbedPane.addTab("Cracking Vigenere Cipher Using Frequency Analysis", null, panelCrackingVigenere, null);
+		panelCrackingVigenere.setLayout(null);
+		
+		
 		btnNewButtonCipherKeywordClear.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e) {
 		outputTextAreaSubstitution.setText("");
@@ -622,7 +783,7 @@ public class MainWindow {
 		keywordTextFieldSubstitution.setText("");
 	}
 });
-		//		btnNewButtonCipherKeywordClear.setBounds(387, 279, 123, 25);
+		
 panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 		
 		
@@ -631,8 +792,6 @@ panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
-//				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, txtr.getText());
-//				JOptionPane.showMessageDialog(frmFrequencyAnalysisV, key);
 				try {
 					String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess("0",
 							txtr.getText(), key);
@@ -642,8 +801,12 @@ panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 				}
 			}
 		});
+		
+		
+		
+		
 
-		btnCaesarDecrypt.addActionListener(new ActionListener() {
+	btnCaesarDecrypt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String key = comboBox.getItemAt(comboBox.getSelectedIndex()) + "";
 				try {
@@ -655,6 +818,7 @@ panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 				}
 			}
 		});
+		
 		
 		
 		btnNewButtonCrackTest.addActionListener(new ActionListener() {

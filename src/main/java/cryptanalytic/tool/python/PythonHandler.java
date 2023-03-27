@@ -166,6 +166,33 @@ public class PythonHandler {
 		return out;
 //		return outputStream.toString().trim();
 	}
+	
+	
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessVigenereCipher(String text,
+			String key, String mode, String alphabet) throws ExecuteException, IOException {
+
+		String line = "py " + resolvePythonScriptPath("VigenereCipher.py " + " \"" + text + "\"" + " \"" + key
+				+ "\"" + " \"" + mode + "\"" + " \"" + alphabet + "\"");
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		return out;
+//		return outputStream.toString().trim();
+	}
+	
+	
+	
+	
+	
+	
 
 	private String resolvePythonScriptPath(String filename) {
 		File file = new File("src/main/resources/" + filename);

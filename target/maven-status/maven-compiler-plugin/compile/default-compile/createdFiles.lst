@@ -11,6 +11,8 @@ cryptanalytic\tool\python\PythonHandler.class
 cryptanalytic\tool\ui\MainWindow$13.class
 cryptanalytic\tool\ui\MainWindow$5.class
 cryptanalytic\tool\ui\util\JFileChooserHandler.class
+cryptanalytic\tool\ui\MainWindow$20.class
+cryptanalytic\tool\ui\MainWindow$23.class
 cryptanalytic\tool\ui\MainWindow$10.class
 cryptanalytic\tool\ui\MainWindow$15.class
 cryptanalytic\tool\ui\MainWindow$7.class
@@ -18,6 +20,8 @@ cryptanalytic\tool\ui\MainWindow.class
 cryptanalytic\tool\ui\util\StockPublicNotesDocumentFilter.class
 cryptanalytic\tool\ui\MainWindow$2.class
 cryptanalytic\tool\ui\MainWindow$12.class
+cryptanalytic\tool\ui\MainWindow$22.class
+cryptanalytic\tool\ui\MainWindow$21.class
 cryptanalytic\tool\ui\MainWindow$19.class
 cryptanalytic\tool\ui\MainWindow$17.class
 cryptanalytic\tool\ui\MainWindow$9.class
