@@ -6,6 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -95,12 +101,12 @@ public class MainWindow {
 		tabbedPane.addTab("Caesar-Cipher", null, panel, null);
 		panel.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("plain_text / cipher_text");
+		JLabel lblNewLabel_1 = new JLabel("Plain Text");
 		lblNewLabel_1.setBounds(44, 31, 156, 16);
 		panel.add(lblNewLabel_1);
 
-		JButton btnNewButtonEncrypt = new JButton("caesar_encrypt");
-		btnNewButtonEncrypt.setBounds(219, 216, 128, 25);
+		JButton btnNewButtonEncrypt = new JButton("Caesar Encrypt");
+		btnNewButtonEncrypt.setBounds(300, 216, 128, 25);
 		panel.add(btnNewButtonEncrypt);
 		// txtr.setBounds(43, 104, 98, 98);
 		JScrollPane scrollPane = new JScrollPane();
@@ -114,7 +120,6 @@ public class MainWindow {
 		scrollPane.setViewportView(txtr);
 		// panel.add(txtr);
 		txtr.setLineWrap(true);
-		txtr.append("WELCOME TO THE CAESAR CIPHER");
 		txtr.setRows(25);
 		txtr.setColumns(25);
 
@@ -123,7 +128,7 @@ public class MainWindow {
 	//	panel.add(btnCaesarDecrypt);
 
 
-		JLabel label = new JLabel("plain_text / cipher_text");
+		JLabel label = new JLabel("Cipher Text");
 		label.setBounds(44, 271, 156, 16);
 		panel.add(label);
 		
@@ -162,6 +167,9 @@ public class MainWindow {
 				}
 			}
 		};
+		
+		
+		
 		
 		
 		tabbedPane.addChangeListener(changeListener);
@@ -325,15 +333,6 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					rdbtnNewRadioButtonPlotFAFile.setSelected(true);
-//					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-//					jfc.setDialogTitle("Select an text file");
-//					jfc.setAcceptAllFileFilterUsed(false);
-//					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
-//					jfc.addChoosableFileFilter(filter);
-//					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
-//					if (returnValue == JFileChooser.APPROVE_OPTION) {
-//						textFieldPlotFAFile.setText(jfc.getSelectedFile().getPath());
-//					}
 					String files = JFileChooserHandler.maximunFiles(frmFrequencyAnalysisV);
 					textFieldPlotFAFile.setText(files);
 				} catch (Exception e1) {
@@ -417,7 +416,7 @@ public class MainWindow {
 		groupPlotLetterFA.add(rdbtnNewRadioButtonLetterFAFile);
 		rdbtnNewRadioButtonLetterFADirect.setSelected(true);
 
-		JButton btnNewButtonLetterFAFile = new JButton("File");
+		JButton btnNewButtonLetterFAFile = new JButton("File FA");
 		btnNewButtonLetterFAFile.setBounds(44, 230, 97, 25);
 		panelFALetters.add(btnNewButtonLetterFAFile);
 
@@ -426,7 +425,7 @@ public class MainWindow {
 		tabbedPane.addTab("Substitution Cipher With a Keyword", null, panelSubstitutionCipherWithaKeyword, null);
 		panelSubstitutionCipherWithaKeyword.setLayout(null);
 
-		JLabel lblNewLabel_1s = new JLabel("plain_text / cipher_text");
+		JLabel lblNewLabel_1s = new JLabel("Plain Text");
 		lblNewLabel_1s.setBounds(44, 31, 156, 16);
 		panelSubstitutionCipherWithaKeyword.add(lblNewLabel_1s);
 
@@ -483,7 +482,7 @@ public class MainWindow {
 		txtCipherKeyword.setRows(25);
 		txtCipherKeyword.setColumns(25);
 
-		JButton btnCaesarDecrypts = new JButton("decrypt");
+		JButton btnCaesarDecrypts = new JButton("Decrypt");
 		btnCaesarDecrypts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -565,7 +564,7 @@ public class MainWindow {
 				panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis, null);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.setLayout(null);
 
-		JLabel lblNewLabel_1ss = new JLabel("ciphertext");
+		JLabel lblNewLabel_1ss = new JLabel("Cipher Text");
 		lblNewLabel_1ss.setBounds(44, 31, 156, 16);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(lblNewLabel_1ss);
 
@@ -580,7 +579,7 @@ public class MainWindow {
 		textAreaCipherKeyword = new JTextArea();    //Cracking Substitution Cipher With a Keyword Using Frequency Analysis first TextArea
 		scrollPaness.setViewportView(textAreaCipherKeyword);
 
-		JButton btnDecrypts = new JButton("crack");
+		JButton btnDecrypts = new JButton("Crack");
 		btnDecrypts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -596,6 +595,24 @@ public class MainWindow {
 		});
 		btnDecrypts.setBounds(280, 216, 128, 25);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(btnDecrypts);
+		
+	/*	
+		JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Crack using FA");
+		btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String outPut = pythonHandler
+							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipher(
+									cipherTextLabel.getText());
+					decodedTextLabel.setText(outPut);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
+		
+		*/
+		
 
 		// JLabel lblNewLabel_2ss = new JLabel("Keyword:");
 		// lblNewLabel_2ss.setBounds(44, 206, 56, 16);
@@ -605,7 +622,7 @@ public class MainWindow {
 		// keywordTextFieldss.setBounds(101, 203, 209, 22);
 		// panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(keywordTextFieldss);
 
-		JLabel labelss = new JLabel("plain_text");
+		JLabel labelss = new JLabel("Plain Text");
 		labelss.setBounds(44, 251, 156, 16);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(labelss);
 
@@ -635,25 +652,78 @@ public class MainWindow {
 			}
 		});
 		
-		JButton btnNewButtonVigenereCipher2 = new JButton("File");
+	
+/*
+		
+		JButton btnNewButtonVigenereCipher2 = new JButton("Pick Files");
 		btnNewButtonVigenereCipher2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					btnNewButtonVigenereCipher2.setSelected(true);
-					JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-					jfc.setDialogTitle("Select an text file");
-					jfc.setAcceptAllFileFilterUsed(false);
-					FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
-					jfc.addChoosableFileFilter(filter);
-					int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
-					if (returnValue == JFileChooser.APPROVE_OPTION) {
-						textFieldLetterFAFile.setText(jfc.getSelectedFile().getPath());
-					}
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		            jfc.setDialogTitle("Select text files");
+		            jfc.setMultiSelectionEnabled(true);
+		            jfc.setAcceptAllFileFilterUsed(false);
+		            FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+		            jfc.addChoosableFileFilter(filter);
+		            int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
+		            if (returnValue == JFileChooser.APPROVE_OPTION) {
+		                File[] selectedFiles = jfc.getSelectedFiles();
+		                StringBuilder fileContent = new StringBuilder();
+		                for (File file : selectedFiles) {
+		                    try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+		                        String line;
+		                        while ((line = br.readLine()) != null) {
+		                            fileContent.append(line).append("\n");
+		                        }
+		                    } catch (IOException e1) {
+		                        e1.printStackTrace();
+		                    }
+		                }
+		                textAreaVigenere.setText(fileContent.toString());
+		            }
+		        } catch (Exception e1) {
+		            e1.printStackTrace();
+		        }
+		    }
 		});
+
+
+		
+		*/
+		
+		JButton btnNewButtonVigenereCipher2 = new JButton("Pick Files");
+		btnNewButtonVigenereCipher2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+		jfc.setDialogTitle("Select text files");
+		jfc.setMultiSelectionEnabled(true);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+		jfc.addChoosableFileFilter(filter);
+		int returnValue = jfc.showOpenDialog(frmFrequencyAnalysisV);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+		    File[] selectedFiles = jfc.getSelectedFiles();
+		    StringBuilder fileContent = new StringBuilder();
+		    for (File file : selectedFiles) {
+		        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+		            String line;
+		            while ((line = br.readLine()) != null) {
+		                fileContent.append(line);
+		            }
+		        } catch (IOException e1) {
+		            e1.printStackTrace();
+		        }
+		    }
+		    textAreaVigenere.setText(fileContent.toString());
+		}
+		        } catch (Exception e1) {
+		            e1.printStackTrace();
+		        }
+		    }
+		});
+		
+		
+		
 
 		textFieldLetterFAFile = new JTextField();
 		textFieldLetterFAFile.setEditable(false);
@@ -721,13 +791,19 @@ public class MainWindow {
 
 		textAreaVigenere.setLineWrap(true);
 		textAreaVigenere.setWrapStyleWord(true);
+		
+
 		int x = 60; // X position
 		int y = 80; // Y position
 		int width = 700; // Width
 		int height = 100; // Height
-		textAreaVigenere.setBounds(x, y, width, height);
-		panelVigenere.add(textAreaVigenere);
-		
+
+		JScrollPane scrollPaneVigenere = new JScrollPane(textAreaVigenere);
+		scrollPaneVigenere.setBounds(x, y, width, height);
+
+		// Add the JScrollPane to your container (e.g., a JPanel)
+		panelVigenere.add(scrollPaneVigenere);
+
 	/*	
 		JTextField keywordTextFieldVigenere = new JTextField();
 		keywordTextFieldVigenere.setBounds(51, 88, 709, 120);
@@ -746,27 +822,33 @@ public class MainWindow {
 		
 		textAreaSecondVigenere.setLineWrap(true);
 		textAreaSecondVigenere.setWrapStyleWord(true);
+
 		int textAreaSecondVigenereX = 60; // X position
 		int textAreaSecondVigenereY = 350; // Y position
 		int textAreaSecondVigenereWidth = 700; // Width
 		int textAreaSecondVigenereHeight = 100; // Height
-		textAreaSecondVigenere.setBounds(textAreaSecondVigenereX, textAreaSecondVigenereY, textAreaSecondVigenereWidth, textAreaSecondVigenereHeight);
-		panelVigenere.add(textAreaSecondVigenere);
+
+		JScrollPane scrollPaneSecondVigenere = new JScrollPane(textAreaSecondVigenere);
+		scrollPaneSecondVigenere.setBounds(textAreaSecondVigenereX, textAreaSecondVigenereY, textAreaSecondVigenereWidth, textAreaSecondVigenereHeight);
+
+		// Add the JScrollPane to your container (e.g., a JPanel)
+		panelVigenere.add(scrollPaneSecondVigenere);
+
 		
-		JRadioButton rdbtnNewRadioButtonFirstPlotVigenere = new JRadioButton("Direct Input Text");
+/*		JRadioButton rdbtnNewRadioButtonFirstPlotVigenere = new JRadioButton("Direct Input Text");
 		rdbtnNewRadioButtonFirstPlotVigenere.setBounds(39, 55, 280, 25);
 		panelVigenere.add(rdbtnNewRadioButtonFirstPlotVigenere);
 		
 		JRadioButton rdbtnNewRadioButtonSecondPlotVigenere = new JRadioButton("Reading a Text File");
 		rdbtnNewRadioButtonSecondPlotVigenere.setBounds(39, 246, 174, 25);
 		panelVigenere.add(rdbtnNewRadioButtonSecondPlotVigenere);
+		*/
 		
-		
-		JLabel lblNewLabelVigenere = new JLabel("plain_text (Enter characters without spaces)");
+		JLabel lblNewLabelVigenere = new JLabel("Plain Text (Enter Capital Letters Without Spaces)");
 		lblNewLabelVigenere.setBounds(44, 31, 356, 16);
 		panelVigenere.add(lblNewLabelVigenere);
 		
-		JLabel lblNewLabelSecondVigenere = new JLabel("cipher_text");
+		JLabel lblNewLabelSecondVigenere = new JLabel("Cipher Text");
 		lblNewLabelSecondVigenere.setBounds(44, 321, 156, 16);
 		panelVigenere.add(lblNewLabelSecondVigenere);
 
@@ -775,6 +857,50 @@ public class MainWindow {
 		tabbedPane.addTab("Cracking Vigenere Cipher Using Frequency Analysis", null, panelCrackingVigenere, null);
 		panelCrackingVigenere.setLayout(null);
 		
+		
+		
+
+		JTextArea textAreaCrackingVigenere = new JTextArea();
+
+
+		textAreaCrackingVigenere.setLineWrap(true);
+		textAreaCrackingVigenere.setWrapStyleWord(true);
+
+
+		JScrollPane scrollPaneCrackingVigenere = new JScrollPane(textAreaCrackingVigenere);
+
+
+		int textAreaCrackingVigenereX = 60; 
+		int textAreaCrackingVigenereY = 80; 
+		int textAreaCrackingVigenereWidth = 700; 
+		int textAreaCrackingVigenereHeight = 100; 
+		scrollPaneCrackingVigenere.setBounds(textAreaCrackingVigenereX, textAreaCrackingVigenereY, textAreaCrackingVigenereWidth, textAreaCrackingVigenereHeight);
+
+
+		panelCrackingVigenere.add(scrollPaneCrackingVigenere);
+		
+		
+		
+		JTextArea SecondtextAreaCrackingVigenere = new JTextArea();
+
+		
+		SecondtextAreaCrackingVigenere.setLineWrap(true);
+		SecondtextAreaCrackingVigenere.setWrapStyleWord(true);
+
+		
+		JScrollPane scrollSecondtextAreaCrackingVigenere = new JScrollPane(SecondtextAreaCrackingVigenere);
+
+		
+		int SecondtextAreaCrackingVigenereX = 60; 
+		int SecondtextAreaCrackingVigenereY = 280; 
+		int SecondtextAreaCrackingVigenereWidth = 700; 
+		int SecondtextAreaCrackingVigenereHeight = 100; 
+		scrollSecondtextAreaCrackingVigenere.setBounds(SecondtextAreaCrackingVigenereX, SecondtextAreaCrackingVigenereY, SecondtextAreaCrackingVigenereWidth, SecondtextAreaCrackingVigenereHeight);
+
+		
+		panelCrackingVigenere.add(scrollSecondtextAreaCrackingVigenere);
+
+
 		
 		btnNewButtonCipherKeywordClear.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent e) {
@@ -786,7 +912,85 @@ public class MainWindow {
 		
 panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 		
-		
+
+
+JLabel cipherTextLabel = new JLabel("Cipher Text");
+
+
+int cipherTextLabelX = 60; 
+int cipherTextLabelY = 60; 
+int cipherTextLabelWidth = 100; 
+int cipherTextLabelHeight = 20; 
+cipherTextLabel.setBounds(cipherTextLabelX, cipherTextLabelY, cipherTextLabelWidth, cipherTextLabelHeight);
+
+
+panelCrackingVigenere.add(cipherTextLabel);
+
+
+
+JLabel decodedTextLabel = new JLabel("Cracked Text");
+
+
+int decodedTextLabelX = 60; 
+int decodedTextLabelY = 260; 
+int decodedTextLabelWidth = 100;
+int decodedTextLabelHeight = 20; 
+decodedTextLabel.setBounds(decodedTextLabelX, decodedTextLabelY, decodedTextLabelWidth, decodedTextLabelHeight);
+
+panelCrackingVigenere.add(decodedTextLabel);
+
+
+
+
+
+
+JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Crack using FA");
+btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+		try {
+			String outPut = pythonHandler
+					.givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipher(
+							textAreaCrackingVigenere.getText());
+			SecondtextAreaCrackingVigenere.setText(outPut);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+	}
+});
+
+
+int btnCrackVigenereCipherFrequencyAnalysisX = 300; 
+int btnCrackVigenereCipherFrequencyAnalysisY = 210; 
+int btnCrackVigenereCipherFrequencyAnalysisWidth = 200; 
+int btnCrackVigenereCipherFrequencyAnalysisHeight = 30; 
+btnCrackVigenereCipherFrequencyAnalysis.setBounds(btnCrackVigenereCipherFrequencyAnalysisX, btnCrackVigenereCipherFrequencyAnalysisY, btnCrackVigenereCipherFrequencyAnalysisWidth, btnCrackVigenereCipherFrequencyAnalysisHeight);
+
+
+panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysis);
+
+
+
+
+
+
+
+ChangeListener changeListenerCrackingVigenereFrequencyAnalysis = new ChangeListener() {
+	public void stateChanged(ChangeEvent changeEvent) {
+		JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+		int index = sourceTabbedPane.getSelectedIndex();
+		System.out.println("Tab changed to: " + sourceTabbedPane.getTitleAt(index));
+		System.out.println("Tab changed to index " + index);
+		if (index == 7) {
+			if (textAreaSecondVigenere.getText().trim().length() > 0) {
+				textAreaCrackingVigenere.setText(textAreaSecondVigenere.getText().trim());
+			}
+		}
+	}
+};
+
+
+
+tabbedPane.addChangeListener(changeListenerCrackingVigenereFrequencyAnalysis);
 		
 
 		btnNewButtonEncrypt.addActionListener(new ActionListener() {
@@ -873,24 +1077,6 @@ panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "File must be selected");
 							return;
 						}
-//						boolean isEmpty = FileHandlerThesis.isFileEmpty(textFieldPlotFAFile.getText());
-//						if (!isEmpty) {
-//							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is empty");
-//							return;
-//						}
-//						int i = FileHandlerThesis.validateCharacters(textFieldPlotFAFile.getText());
-//						if (i == 0) {
-//							JOptionPane.showMessageDialog(frmFrequencyAnalysisV, "The File is not having content");
-//							return;
-//						} else if (i == 1) {
-//							JOptionPane.showMessageDialog(frmFrequencyAnalysisV,
-//									"File is having more than 10000 Characters");
-//							return;
-//						} else if (i == 2) {
-//							String outPut = pythonHandler
-//									.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(
-//											textFieldPlotFAFile.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
-//						}
 						String outPut = pythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(
 								textFieldPlotFAFile.getText(), comboBox_Plot_FA.getSelectedIndex() + "");
 					}

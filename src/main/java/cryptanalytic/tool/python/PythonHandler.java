@@ -15,7 +15,7 @@ public class PythonHandler {
 			throws ExecuteException, IOException {
 		// Parameter 0 Encrytion
 		// Parameter 1 Dencrytion
-		String line = "py "
+		String line = "python "
 				+ resolvePythonScriptPath("caesarCipherThesis.py " + param + " " + key + " \"" + text + "\"");
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -36,7 +36,7 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String text)
 			throws ExecuteException, IOException {
 
-		String line = "py " + resolvePythonScriptPath("frequencyAnalysisCaesar.py" + " \"" + text + "\"");
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisCaesar.py" + " \"" + text + "\"");
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
@@ -58,7 +58,7 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFADirectInput(String text, String alphabet)
 			throws ExecuteException, IOException {
 
-		String line = "py "
+		String line = "python "
 				+ resolvePythonScriptPath("frequencyAnalysisPlot.py" + " \"" + text + " \"" + " " + alphabet);
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 //		System.out.println(line);
@@ -76,7 +76,7 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessPlotFAFile(String text, String alphabet)
 			throws ExecuteException, IOException {
 
-		String line = "py "
+		String line = "python "
 				+ resolvePythonScriptPath("frequencyAnalysisPlotFile.py" + " \"" + text + " \"" + " " + alphabet);
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 		System.out.println(line);
@@ -102,7 +102,7 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFADirectInput(String text, int i)
 			throws ExecuteException, IOException {
 
-		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReport.py" + " \"" + text + "\"");
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisLetterReport.py" + " \"" + text + "\"");
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -122,7 +122,7 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessLetterFAFile(String text, int i)
 			throws ExecuteException, IOException {
 
-		String line = "py " + resolvePythonScriptPath("frequencyAnalysisLetterReportFile.py" + " \"" + text + "\"");
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisLetterReportFile.py" + " \"" + text + "\"");
 //		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -150,7 +150,7 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCaesarCipherWithKeywordDirectInput(String text,
 			String key, String mode, String alphabet) throws ExecuteException, IOException {
 
-		String line = "py " + resolvePythonScriptPath("caesarCipherWithKeyword.py " + " \"" + text + "\"" + " \"" + key
+		String line = "python " + resolvePythonScriptPath("caesarCipherWithKeyword.py " + " \"" + text + "\"" + " \"" + key
 				+ "\"" + " \"" + mode + "\"" + " \"" + alphabet + "\"");
 
 		System.out.println(line);
@@ -171,8 +171,27 @@ public class PythonHandler {
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessVigenereCipher(String text,
 			String key, String mode, String alphabet) throws ExecuteException, IOException {
 
-		String line = "py " + resolvePythonScriptPath("VigenereCipher.py " + " \"" + text + "\"" + " \"" + key
+		String line = "python " + resolvePythonScriptPath("VigenereCipher.py " + " \"" + text + "\"" + " \"" + key
 				+ "\"" + " \"" + mode + "\"" + " \"" + alphabet + "\"");
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		return out;
+//		return outputStream.toString().trim();
+	}
+	
+	
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipher(String text) throws ExecuteException, IOException {
+
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisVigenereCipher.py " + " \"" + text + "\"");
 
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -205,7 +224,7 @@ public class PythonHandler {
 		//for now 
 		mode = "1";
 		alphabet = "0";
-		String line = "py " + resolvePythonScriptPath("frequencyAnalysisSubstitutionCipherFA.py " + " \"" + text + "\""
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisSubstitutionCipherFA.py " + " \"" + text + "\""
 				+ " \"" + mode + "\"" + " \"" + alphabet + "\"");
 
 		System.out.println(line);
