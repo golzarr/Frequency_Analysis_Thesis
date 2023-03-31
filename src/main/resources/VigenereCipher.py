@@ -67,7 +67,8 @@ if __name__ == '__main__':
     LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
     if (sys.argv[4] == '1'):
-        LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
+          LETTERS = 'ABCDDDZEFGHCHIJKLMNOPQRSTUVWXYZ'
+      #   LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹĽMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
     elif (sys.argv[4] == '2'):
         LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 

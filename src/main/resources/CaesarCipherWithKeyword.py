@@ -1,30 +1,30 @@
 import sys, random
 
-
 LETTERS = ''
 
-def main(text,key,mode,pLetters):
+
+def main(text, key, mode, pLetters):
     LETTERS = pLetters
     myMessage = text
-    #print(key)
-    myKey=normalizeKey(key,LETTERS)
+    # print(key)
+    myKey = normalizeKey(key, LETTERS)
     myMode = mode
-    #print(text)
-    #print(myKey)
-    #print(mode)
-    #if not keyIsValid(myKey):
+    # print(text)
+    # print(myKey)
+    # print(mode)
+    # if not keyIsValid(myKey):
     #    sys.exit('There is an error in the key or symbol set.')
     if myMode == 'encrypt':
         translated = encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
         translated = decryptMessage(myKey, myMessage)
-    #print('Using key %s' % (myKey))
-    #print('The %sed message is:' % (myMode))
-    
+    # print('Using key %s' % (myKey))
+    # print('The %sed message is:' % (myMode))
+
     TestText2 = translated.encode('utf8')
     sys.stdout.buffer.write(TestText2)
-    #print(translated)
-    
+    # print(translated)
+
 
 def keyIsValid(key):
     keyList = list(key)
@@ -78,40 +78,39 @@ def normalizeKey(plain_text, ALPHABET):
     newKey_text = ''
     # we make the algorithm case insensitive
     plain_text = plain_text.upper()
-    #print(plain_text)
-    #print(ALPHABET)
+    # print(plain_text)
+    # print(ALPHABET)
     # consider all the letters in the Key
     for c in plain_text:
-        ALPHABET= ALPHABET.replace(c, '',1)
+        ALPHABET = ALPHABET.replace(c, '', 1)
 
-    newKey_text=plain_text+ALPHABET
-    
+    newKey_text = plain_text + ALPHABET
+
     Tofix = newKey_text
 
-    while(len(Tofix) > len(LETTERS)):
+    while (len(Tofix) > len(LETTERS)):
         Tofix = Tofix[:-1]
-    
-    #print(Tofix)
+
+    # print(Tofix)
     return Tofix
 
 
 if __name__ == '__main__':
-	
-	text = sys.argv[1]
-	key = sys.argv[2]
-	mode = 'encrypt'
-	
-	if (sys.argv[3] == '1'):
-		mode = 'encrypt'
-	elif (sys.argv[3] == '2'):
-		mode = 'decrypt'
-		
-	LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	
-	if (sys.argv[4] == '1'):
-		LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
-	elif (sys.argv[4] == '2'):
-		LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
-	
-	
-	main(text,key,mode,LETTERS)
+
+    text = sys.argv[1]
+    key = sys.argv[2]
+    mode = 'encrypt'
+
+    if (sys.argv[3] == '1'):
+        mode = 'encrypt'
+    elif (sys.argv[3] == '2'):
+        mode = 'decrypt'
+
+    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    if (sys.argv[4] == '1'):
+        LETTERS = 'AÁÄBCČDĎDZDŽEÉFGHCHIÍJKLĹMNŇOÓÔPQRŔSŠTŤUÚVWXYÝZŽ'
+    elif (sys.argv[4] == '2'):
+        LETTERS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
+
+    main(text, key, mode, LETTERS)
