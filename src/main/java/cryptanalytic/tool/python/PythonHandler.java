@@ -222,6 +222,64 @@ public class PythonHandler {
 //		return outputStream.toString().trim();
 	}
 	
+	
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherNewsArticle(String text) throws ExecuteException, IOException {
+
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisVigenereCipherSlovakNewsArticle.py " + " \"" + text + "\"");
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		return out;
+//		return outputStream.toString().trim();
+	}
+	
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherEducationalArticle(String text) throws ExecuteException, IOException {
+
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisVigenereCipherSlovakEducationalArticle.py " + " \"" + text + "\"");
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		return out;
+//		return outputStream.toString().trim();
+	}
+	
+	
+	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherFictionalizedArticle(String text) throws ExecuteException, IOException {
+
+		String line = "python " + resolvePythonScriptPath("frequencyAnalysisVigenereCipherSlovakFictionalizedArticle.py " + " \"" + text + "\"");
+
+		System.out.println(line);
+		CommandLine cmdLine = CommandLine.parse(line);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
+
+		DefaultExecutor executor = new DefaultExecutor();
+		executor.setStreamHandler(streamHandler);
+
+		int exitCode = executor.execute(cmdLine);
+		String out = new String(outputStream.toByteArray(), "UTF-8");
+		return out;
+//		return outputStream.toString().trim();
+	}
+	
+	
+	
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherSlovak(String text) throws ExecuteException, IOException {
 
 		String line = "python " + resolvePythonScriptPath("frequencyAnalysisVigenereCipherSlovak.py " + " \"" + text + "\"");

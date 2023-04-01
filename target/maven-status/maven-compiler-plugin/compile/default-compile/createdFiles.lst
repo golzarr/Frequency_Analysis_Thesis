@@ -4,6 +4,7 @@ cryptanalytic\tool\ui\MainWindow$6.class
 cryptanalytic\tool\ui\MainWindow$11.class
 cryptanalytic\tool\fa\AndrejThesis.class
 cryptanalytic\tool\ui\MainWindow$18.class
+cryptanalytic\tool\ui\MainWindow$28.class
 cryptanalytic\tool\ui\util\JFileChooserHandler.class
 cryptanalytic\tool\ui\MainWindow$20.class
 cryptanalytic\tool\ui\MainWindow$10.class
@@ -18,6 +19,7 @@ cryptanalytic\tool\ui\MainWindow$14.class
 cryptanalytic\tool\ui\MainWindow$8.class
 cryptanalytic\tool\ui\MainWindow$1.class
 cryptanalytic\tool\ui\MainWindow$16.class
+cryptanalytic\tool\ui\MainWindow$26.class
 cryptanalytic\tool\python\PythonHandler.class
 cryptanalytic\tool\ui\MainWindow$13.class
 cryptanalytic\tool\ui\MainWindow$5.class
@@ -27,5 +29,6 @@ cryptanalytic\tool\ui\MainWindow$2.class
 cryptanalytic\tool\ui\MainWindow$12.class
 cryptanalytic\tool\ui\MainWindow$21.class
 cryptanalytic\tool\ui\MainWindow$19.class
+cryptanalytic\tool\ui\MainWindow$27.class
 cryptanalytic\tool\ui\MainWindow$9.class
 cryptanalytic\tool\ui\MainWindow$24.class

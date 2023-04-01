@@ -1,5 +1,4 @@
 import numpy as np
-import collections
 import string
 from math import sqrt
 import sys

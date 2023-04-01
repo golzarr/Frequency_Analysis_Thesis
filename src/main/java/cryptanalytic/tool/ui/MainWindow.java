@@ -89,8 +89,8 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frmFrequencyAnalysisV = new JFrame();
-		frmFrequencyAnalysisV.setTitle("Frequency Analysis v1.0");
-		frmFrequencyAnalysisV.setBounds(100, 100, 836, 581);
+		frmFrequencyAnalysisV.setTitle("Frequency Analysis Tool");
+		frmFrequencyAnalysisV.setBounds(100, 100, 1136, 581);
 		frmFrequencyAnalysisV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFrequencyAnalysisV.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 
@@ -827,7 +827,32 @@ public class MainWindow {
 		tabbedPane.addTab("Cracking Vigenere Cipher Using Frequency Analysis", null, panelCrackingVigenere, null);
 		panelCrackingVigenere.setLayout(null);
 		
-		
+	/*	
+		JComboBox<String> dropdownMenuTypeOfText = new JComboBox<String>();
+
+		// Add items to the JComboBox
+		dropdownMenuTypeOfText.addItem("Choose Option");
+		dropdownMenuTypeOfText.addItem("Newspaper Article");
+		dropdownMenuTypeOfText.addItem("Educational Text");
+		dropdownMenuTypeOfText.addItem("Fictionalized Text");
+		dropdownMenuTypeOfText.setBounds(60, 210, 130, 30);
+
+		// Add a listener to handle selection events
+		dropdownMenuTypeOfText.addItemListener(new ItemListener() {
+		    @Override
+		    public void itemStateChanged(ItemEvent e) {
+		        if (e.getStateChange() == ItemEvent.SELECTED) {
+		            String selectedItem = (String) dropdownMenuTypeOfText.getSelectedItem();
+		            // Handle the selection event here
+		            System.out.println("Selected item: " + selectedItem);
+		        }
+		    }
+		});
+
+
+		// Add the JComboBox to your panel
+		panelCrackingVigenere.add(dropdownMenuTypeOfText);
+		*/	
 		
 
 		JTextArea textAreaCrackingVigenere = new JTextArea();
@@ -945,7 +970,7 @@ panelCrackingVigenere.add(decodedTextLabel);
 
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Crack english text using FA");
+JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Crack English Text");
 btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -994,9 +1019,9 @@ btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisX = 200; 
+int btnCrackVigenereCipherFrequencyAnalysisX = 10; 
 int btnCrackVigenereCipherFrequencyAnalysisY = 210; 
-int btnCrackVigenereCipherFrequencyAnalysisWidth = 200; 
+int btnCrackVigenereCipherFrequencyAnalysisWidth = 150; 
 int btnCrackVigenereCipherFrequencyAnalysisHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysis.setBounds(btnCrackVigenereCipherFrequencyAnalysisX, btnCrackVigenereCipherFrequencyAnalysisY, btnCrackVigenereCipherFrequencyAnalysisWidth, btnCrackVigenereCipherFrequencyAnalysisHeight);
 
@@ -1005,7 +1030,212 @@ panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysis);
 
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysisSlovak = new JButton("Crack slovak text using FA");
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+JButton btnCrackVigenereCipherFrequencyAnalysisNewsArticle = new JButton("Crack Slovak News Article");
+btnCrackVigenereCipherFrequencyAnalysisNewsArticle.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        try {
+            String outPut = pythonHandler
+                    .givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherNewsArticle(
+                            textAreaCrackingVigenere.getText());
+            SecondtextAreaCrackingVigenere.setText(outPut);
+
+            // Get the text from both JTextAreas
+            String textAreaSecondVigenereContent = textAreaVigenere.getText();
+            String SecondtextAreaCrackingVigenereContent = SecondtextAreaCrackingVigenere.getText();
+
+            // Calculate the percentage of matching alphanumeric characters
+            int minLength = Math.min(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+            int maxLength = Math.max(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+            int matchingChars = 0;
+            int totalChars = Math.min(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+
+            for (int i = 0; i < totalChars; i++) {
+                char c1 = textAreaSecondVigenereContent.charAt(i);
+                char c2 = SecondtextAreaCrackingVigenereContent.charAt(i);
+                if (Character.isLetterOrDigit(c1) && Character.isLetterOrDigit(c2) && c1 == c2) {
+                    matchingChars++;
+                }
+            }
+
+            // Include the remaining alphanumeric characters from the longer text area
+            for (int i = totalChars; i < maxLength; i++) {
+                char c = SecondtextAreaCrackingVigenereContent.charAt(i);
+                if (Character.isLetterOrDigit(c)) {
+                    totalChars++;
+                }
+            }
+
+            // Calculate the percentage of match
+            double matchPercentage = (double) matchingChars / totalChars * 100;
+
+            // Set the result in the ThirdTextAreaCrackingVigenere
+            ThirdTextAreaCrackingVigenere.setText(String.format("%.2f%%", matchPercentage));
+
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+});
+
+
+
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleX = 330; 
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleY = 210; 
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleWidth = 200; 
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleHeight = 30; 
+btnCrackVigenereCipherFrequencyAnalysisNewsArticle.setBounds(btnCrackVigenereCipherFrequencyAnalysisNewsArticleX, btnCrackVigenereCipherFrequencyAnalysisNewsArticleY, btnCrackVigenereCipherFrequencyAnalysisNewsArticleWidth, btnCrackVigenereCipherFrequencyAnalysisNewsArticleHeight);
+
+
+panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysisNewsArticle);
+
+
+
+
+
+
+
+JButton btnCrackVigenereCipherFrequencyAnalysisEducationalArticle = new JButton("Crack Slovak Educational Article");
+btnCrackVigenereCipherFrequencyAnalysisEducationalArticle.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        try {
+            String outPut = pythonHandler
+                    .givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherEducationalArticle(
+                            textAreaCrackingVigenere.getText());
+            SecondtextAreaCrackingVigenere.setText(outPut);
+
+            // Get the text from both JTextAreas
+            String textAreaSecondVigenereContent = textAreaVigenere.getText();
+            String SecondtextAreaCrackingVigenereContent = SecondtextAreaCrackingVigenere.getText();
+
+            // Calculate the percentage of matching alphanumeric characters
+            int minLength = Math.min(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+            int maxLength = Math.max(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+            int matchingChars = 0;
+            int totalChars = Math.min(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+
+            for (int i = 0; i < totalChars; i++) {
+                char c1 = textAreaSecondVigenereContent.charAt(i);
+                char c2 = SecondtextAreaCrackingVigenereContent.charAt(i);
+                if (Character.isLetterOrDigit(c1) && Character.isLetterOrDigit(c2) && c1 == c2) {
+                    matchingChars++;
+                }
+            }
+
+            // Include the remaining alphanumeric characters from the longer text area
+            for (int i = totalChars; i < maxLength; i++) {
+                char c = SecondtextAreaCrackingVigenereContent.charAt(i);
+                if (Character.isLetterOrDigit(c)) {
+                    totalChars++;
+                }
+            }
+
+            // Calculate the percentage of match
+            double matchPercentage = (double) matchingChars / totalChars * 100;
+
+            // Set the result in the ThirdTextAreaCrackingVigenere
+            ThirdTextAreaCrackingVigenere.setText(String.format("%.2f%%", matchPercentage));
+
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+});
+
+
+
+int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleX = 540; 
+int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleY = 210; 
+int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleWidth = 250; 
+int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleHeight = 30; 
+btnCrackVigenereCipherFrequencyAnalysisEducationalArticle.setBounds(btnCrackVigenereCipherFrequencyAnalysisEducationalArticleX, btnCrackVigenereCipherFrequencyAnalysisEducationalArticleY, btnCrackVigenereCipherFrequencyAnalysisEducationalArticleWidth, btnCrackVigenereCipherFrequencyAnalysisEducationalArticleHeight);
+
+
+panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysisEducationalArticle);
+
+
+
+JButton btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle = new JButton("Crack Slovak Fictionalized Article");
+btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        try {
+            String outPut = pythonHandler
+                    .givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipherFictionalizedArticle(
+                            textAreaCrackingVigenere.getText());
+            SecondtextAreaCrackingVigenere.setText(outPut);
+
+            // Get the text from both JTextAreas
+            String textAreaSecondVigenereContent = textAreaVigenere.getText();
+            String SecondtextAreaCrackingVigenereContent = SecondtextAreaCrackingVigenere.getText();
+
+            // Calculate the percentage of matching alphanumeric characters
+            int minLength = Math.min(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+            int maxLength = Math.max(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+            int matchingChars = 0;
+            int totalChars = Math.min(textAreaSecondVigenereContent.length(), SecondtextAreaCrackingVigenereContent.length());
+
+            for (int i = 0; i < totalChars; i++) {
+                char c1 = textAreaSecondVigenereContent.charAt(i);
+                char c2 = SecondtextAreaCrackingVigenereContent.charAt(i);
+                if (Character.isLetterOrDigit(c1) && Character.isLetterOrDigit(c2) && c1 == c2) {
+                    matchingChars++;
+                }
+            }
+
+            // Include the remaining alphanumeric characters from the longer text area
+            for (int i = totalChars; i < maxLength; i++) {
+                char c = SecondtextAreaCrackingVigenereContent.charAt(i);
+                if (Character.isLetterOrDigit(c)) {
+                    totalChars++;
+                }
+            }
+
+            // Calculate the percentage of match
+            double matchPercentage = (double) matchingChars / totalChars * 100;
+
+            // Set the result in the ThirdTextAreaCrackingVigenere
+            ThirdTextAreaCrackingVigenere.setText(String.format("%.2f%%", matchPercentage));
+
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+});
+
+
+
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleX = 800; 
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleY = 210; 
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleWidth = 250; 
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleHeight = 30; 
+btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle.setBounds(btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleX, btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleY, btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleWidth, btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleHeight);
+
+
+panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle);
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+JButton btnCrackVigenereCipherFrequencyAnalysisSlovak = new JButton("Crack Slovak Text ");
 btnCrackVigenereCipherFrequencyAnalysisSlovak.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -1054,9 +1284,9 @@ btnCrackVigenereCipherFrequencyAnalysisSlovak.addActionListener(new ActionListen
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisSlovakX = 410; 
+int btnCrackVigenereCipherFrequencyAnalysisSlovakX = 170; 
 int btnCrackVigenereCipherFrequencyAnalysisSlovakY = 210; 
-int btnCrackVigenereCipherFrequencyAnalysisSlovakWidth = 200; 
+int btnCrackVigenereCipherFrequencyAnalysisSlovakWidth = 150; 
 int btnCrackVigenereCipherFrequencyAnalysisSlovakHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysisSlovak.setBounds(btnCrackVigenereCipherFrequencyAnalysisSlovakX, btnCrackVigenereCipherFrequencyAnalysisSlovakY, btnCrackVigenereCipherFrequencyAnalysisSlovakWidth, btnCrackVigenereCipherFrequencyAnalysisSlovakHeight);
 
