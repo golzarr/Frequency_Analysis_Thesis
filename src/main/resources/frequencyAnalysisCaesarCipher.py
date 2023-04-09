@@ -47,5 +47,4 @@ def caesar_decrypt(ciphertext, shift):
 ciphertext = sys.argv[1]
 shift = frequency_analysis(ciphertext)
 plaintext = caesar_decrypt(ciphertext, shift)
-#print("Plaintext:", plaintext)
 print(plaintext)

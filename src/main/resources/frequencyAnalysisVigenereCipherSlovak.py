@@ -1,135 +1,109 @@
 import numpy as np
-import collections
 import string
 from math import sqrt
 import sys
 
-# get ciphertext from command line argument
 ct = sys.argv[1]
 
 
 
-# Function to find the keylength
-def finding_keylength(ciphertext):
 
-    coincidence = []
+def determine_key_length(cipher_text):
+
+    coincidences = []
     for i in range(2,31):
         count = 0
         for j in range(0,len(ct) - i):
-            if ciphertext[j] == ciphertext[j + i]:
+            if cipher_text[j] == cipher_text[j + i]:
                 count += 1
-        coincidence.append(count) # a list
-
-  #  for n in range(len(coincidence)):
-  #      print("Number of coincidences for ",n + 2," shifts are ",coincidence[n],"\n" )
-
-    # maximum coincidence is as follow:
-    max_coincidence = max(coincidence) # a number
-
-    # number of shift at which maximum coincidence occurs:
-    shift = coincidence.index(max_coincidence) + 2 # index of maximum number of the list
+        coincidences.append(count)
 
 
-    #listing the coincidences in increasing to decreasing order
-    coincidence2 = list(set(coincidence)) #removing duplicates
+    max_coincidence = max(coincidences)
 
 
-    max2 = np.gcd(coincidence.index(max_coincidence)+2,coincidence.index(coincidence2[-2])+2)
+    change = coincidences.index(max_coincidence) + 2
 
 
-    max3 = np.gcd(coincidence.index(max_coincidence)+2,coincidence.index(coincidence2[-3])+2)
+
+    coincidence2 = list(set(coincidences))
 
 
-    max4 = np.gcd(coincidence.index(max_coincidence)+2,coincidence.index(coincidence2[-4])+2)
+    max2 = np.gcd(coincidences.index(max_coincidence)+2,coincidences.index(coincidence2[-2])+2)
+    max3 = np.gcd(coincidences.index(max_coincidence)+2,coincidences.index(coincidence2[-3])+2)
+    max4 = np.gcd(coincidences.index(max_coincidence)+2,coincidences.index(coincidence2[-4])+2)
 
 
     lst = [max2,max3,max4]
     return (max(set(lst), key = lst.count))
 
 
-# Function to find the key
-def finding_key(ciphertext, key_length):
+
+def compute_key(ciphertext, key_length):
     key = ""
     for k in range(key_length):
-        # frequency in english text of A to Z:
-        #noviny     slovak_freq = [9.86, 1.76, 2.96, 4.12, 9.7, 0.1, 0.33, 1.89, 7.17, 1.83, 2.96, 4.88, 3.59, 6.31, 9.53, 3.22, 0,
-        #               5.35, 5.45, 5.25, 3.65, 4.82, 0, 0.03, 2.36, 2.89]
-
-        #beletrizovany text      slovak_freq = [10.96, 1.72, 2.96, 4.19, 8.49, 0.14, 0.1, 2.78, 7.32, 1.41, 3.81, 4.95, 3.71, 5.84, 10.65, 2.41,
-        #               0, 4.09, 6.08, 4.88, 2.92, 5.02, 0, 0.03, 2.51, 3.02]
-
-        #odborny text  slovak_freq = [9.66, 1.13, 3.34, 2.98, 9.01, 0.72, 0.64, 2.33, 7.08, 2.41, 4.06, 2.86, 3.14, 6.2, 10.3, 2.78, 0,
-        #               4.63, 5.11, 6.44, 3.78, 4.31, 0, 0.16, 3.42, 3.5]
-
-
-
-
         slovak_freq = [8.83, 1.46, 3.27, 3.67, 9.29, 0.28, 0.23, 0.17, 6.01, 0.09, 0.86, 3.68, 2.42, 5.21, 5.55, 1.73,0.09, 4.58, 5.20, 5.58, 3.54, 2.33, 0.14, 0.01, 1.43, 1.13]
-
-
-
 
         substrings = [ciphertext[i::key_length] for i in range(key_length)]
 
 
-        x = np.arange(25)
+        x = np.arange(26)
         data = np.full(26,0)
 
         for char in substrings[k]:
-            lett = ord(char) - 65 # converting all letter from ASCII range to (0,25) range
-            data[lett] += 1 # data is the frequency of each letter
+            lett = ord(char) - 65
+            data[lett] += 1
 
 
         tot = 0
         tot2 = 0
-        for i in range(25):
+        for i in range(26):
             tot += data[i]
             tot2 += slovak_freq[i]
-        for i in range(25):
+        for i in range(26):
             data[i] = data[i]*tot2/tot
 
         error = []
-        for shift in range(25):
+        for shift in range(26):
             err = 0
-            for i in range(25):
-                err += sqrt((data[i] - slovak_freq[(i + shift) % 25]) ** 2)
+            for i in range(26):
+                err += sqrt((data[i] - slovak_freq[(i + shift) % 26]) ** 2)
             error.append(err)
 
 
-        # Finding the best match
+
         guess = 0
         best = error[0]
 
-        for i in range(25):
+        for i in range(26):
             if error[i] < best:
                 guess = i
                 best = error[i]
 
 
-        key = key + chr((25-guess) % 25 + 65)
+        key = key + chr((26-guess) % 26 + 65)
 
     return key
 
-# Function to decrypt the ciphertext
-def deciphering(ciphertext,key):
-    plaintext = ""
+
+def decrypt_text(ciphertext,key):
+    decrypted_text  = ""
     for i, c in enumerate(ciphertext):
         if c not in string.ascii_uppercase:
-            plaintext += c
+            decrypted_text += c
         else:
             shift = string.ascii_uppercase.index(key[i % len(key)])
-            plaintext += string.ascii_uppercase[(string.ascii_uppercase.index(c) - shift) % 25]
-    return plaintext
+            decrypted_text += string.ascii_uppercase[(string.ascii_uppercase.index(c) - shift) % 26]
+    return decrypted_text
 
 
 
-# Calling the functions to find the keylength, key and plaintext:
 
-key_length = finding_keylength(ct)
-#print("Key length is ",key_length)
 
-key = finding_key(ct,key_length)
-#print("Key is: ", key)
+key_length = determine_key_length(ct)
 
-plaintext = deciphering(ct,key)
+
+key = compute_key(ct,key_length)
+
+plaintext = decrypt_text(ct,key)
 print(plaintext)

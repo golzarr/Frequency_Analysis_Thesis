@@ -89,23 +89,25 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frmFrequencyAnalysisV = new JFrame();
-		frmFrequencyAnalysisV.setTitle("Frequency Analysis Tool");
-		frmFrequencyAnalysisV.setBounds(100, 100, 1136, 581);
+//		frmFrequencyAnalysisV.setTitle("Nástroj na analýzu frekvencie");
+		frmFrequencyAnalysisV.setBounds(100, 100, 886, 581);
 		frmFrequencyAnalysisV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFrequencyAnalysisV.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmFrequencyAnalysisV.getContentPane().add(tabbedPane);
+		
+		
 
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("Caesar-Cipher", null, panel, null);
+		tabbedPane.addTab("Cézarova Šifra", null, panel, null);
 		panel.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("Plain Text");
+		JLabel lblNewLabel_1 = new JLabel("Nešifrovaný Text");
 		lblNewLabel_1.setBounds(44, 31, 156, 16);
 		panel.add(lblNewLabel_1);
 
-		JButton btnNewButtonEncrypt = new JButton("Caesar Encrypt");
+		JButton btnNewButtonEncrypt = new JButton("Zašifrovať");
 		btnNewButtonEncrypt.setBounds(300, 216, 128, 25);
 		panel.add(btnNewButtonEncrypt);
 		// txtr.setBounds(43, 104, 98, 98);
@@ -118,24 +120,35 @@ public class MainWindow {
 		txtr.setColumns(25);
 
 		scrollPane.setViewportView(txtr);
-		// panel.add(txtr);
 		txtr.setLineWrap(true);
 		txtr.setRows(25);
 		txtr.setColumns(25);
+		
+		JLabel label = new JLabel("Zašifrovaný Text");
+		label.setBounds(44, 271, 156, 16);
+		panel.add(label);
+		
+		comboBox = new JComboBox(defaultKeys);
+		comboBox.setBounds(75, 216, 72, 22);
+		comboBox.setSelectedItem("3");
+		panel.add(comboBox);
+		
+		
+		
+		
+		
+		
+		
 
 		JButton btnCaesarDecrypt = new JButton("caesar_decrypt");
 		btnCaesarDecrypt.setBounds(373, 216, 128, 25);
 	//	panel.add(btnCaesarDecrypt);
 
 
-		JLabel label = new JLabel("Cipher Text");
-		label.setBounds(44, 271, 156, 16);
-		panel.add(label);
-		
 
 		
 		JPanel panelFA = new JPanel();
-		tabbedPane.addTab("Cracking Caesar-Cipher with Frequency Analysis", null, panelFA, null);
+		tabbedPane.addTab("Prelamovanie Cézarovej Šifry Pomocou Frekvenčnej Analýzy", null, panelFA, null);
 		panelFA.setLayout(null);
 		
 		
@@ -175,17 +188,17 @@ public class MainWindow {
 		tabbedPane.addChangeListener(changeListener);
 		tabbedPane.addChangeListener(changeListenerCrackingCaesarCipherWithFrequencyAnalysis);
 
-		JLabel lblNewLabel_2 = new JLabel("Cipher Text");
+		JLabel lblNewLabel_2 = new JLabel("Zašifrovaný Text");
 		lblNewLabel_2.setBounds(42, 24, 110, 16);
 		panelFA.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_Cracked_Text = new JLabel("Cracked Text");
+		JLabel lblNewLabel_Cracked_Text = new JLabel("Prelomený Text");
 		lblNewLabel_Cracked_Text.setBounds(42, 300, 110, 16);
 		panelFA.add(lblNewLabel_Cracked_Text);
 
 
 		
-		JButton btnNewButtonCrackTest = new JButton("Crack Test");
+		JButton btnNewButtonCrackTest = new JButton("Prelomiť");
 		btnNewButtonCrackTest.setBounds(301, 225, 97, 25);
 		panelFA.add(btnNewButtonCrackTest);
 		
@@ -252,7 +265,7 @@ public class MainWindow {
 		comboBox.setSelectedItem("3");
 		panel.add(comboBox);
 
-		JLabel lblNewLabel_3 = new JLabel("Key");
+		JLabel lblNewLabel_3 = new JLabel("Kľúč");
 		lblNewLabel_3.setBounds(43, 219, 56, 16);
 		panel.add(lblNewLabel_3);
 
@@ -272,10 +285,11 @@ public class MainWindow {
 		*/
 
 		JPanel panelPlot = new JPanel();
-		tabbedPane.addTab("Plot Distribution Frequency Analysis", null, panelPlot, null);
+		tabbedPane.addTab("Graf Frekvenčnej Analýzy", null, panelPlot, null);
 		panelPlot.setLayout(null);
 
-		JLabel lblNewLabelFA = new JLabel("Frequency Analysis");
+		JLabel lblNewLabelFA = new JLabel("Frekvenčná Analýza");
+		lblNewLabelFA.setVisible(false);
 		lblNewLabelFA.setBounds(44, 31, 156, 16);
 		panelPlot.add(lblNewLabelFA);
 
@@ -291,7 +305,7 @@ public class MainWindow {
 		StockPublicNotesDocumentFilter publicNotesfilter = new StockPublicNotesDocumentFilter(100);
 		((PlainDocument) txtrPlotFA.getDocument()).setDocumentFilter(publicNotesfilter);
 
-		JLabel lblNewLabelPlot = new JLabel("Letters");
+		JLabel lblNewLabelPlot = new JLabel("Písmená");
 		lblNewLabelPlot.setBounds(44, 333, 63, 16);
 		panelPlot.add(lblNewLabelPlot);
 
@@ -302,15 +316,15 @@ public class MainWindow {
 		panelPlot.add(txtAlphabetPlot);
 		txtAlphabet.setColumns(10);
 
-		JButton btnFrequencyAnalysisPlot = new JButton("Generate Plot");
+		JButton btnFrequencyAnalysisPlot = new JButton("Vytvoriť Graf");
 		btnFrequencyAnalysisPlot.setBounds(230, 396, 121, 25);
 		panelPlot.add(btnFrequencyAnalysisPlot);
 
-		JLabel lblNewLabel_Panel_Plot = new JLabel("Alphabet");
+		JLabel lblNewLabel_Panel_Plot = new JLabel("Abeceda");
 		lblNewLabel_Panel_Plot.setBounds(44, 288, 56, 16);
 		panelPlot.add(lblNewLabel_Panel_Plot);
 
-		String[] Alphabet = { "English", "Slovak", "Spanish" };
+		String[] Alphabet = { "Angličtina", "Slovenčina", "Španielčina" };
 		JComboBox comboBox_Plot_FA = new JComboBox(Alphabet);
 		comboBox_Plot_FA.setBounds(119, 285, 109, 22);
 		comboBox_Plot_FA.addItemListener(new ItemListener() {
@@ -325,11 +339,11 @@ public class MainWindow {
 		// + "";
 		selectAlphabetPlot(comboBox_Plot_FA.getSelectedIndex(), txtAlphabetPlot);
 
-		JRadioButton rdbtnNewRadioButtonPlotFADirect = new JRadioButton("Direct Input Text (Max 100 characters)");
+		JRadioButton rdbtnNewRadioButtonPlotFADirect = new JRadioButton("Priame Zadávanie Textu (Max 100 znakov)");
 		rdbtnNewRadioButtonPlotFADirect.setBounds(39, 55, 280, 25);
 		panelPlot.add(rdbtnNewRadioButtonPlotFADirect);
 
-		JRadioButton rdbtnNewRadioButtonPlotFAFile = new JRadioButton("Reading a Text File");
+		JRadioButton rdbtnNewRadioButtonPlotFAFile = new JRadioButton("Čítanie Textového Súboru");
 		rdbtnNewRadioButtonPlotFAFile.setBounds(39, 196, 184, 25);
 		panelPlot.add(rdbtnNewRadioButtonPlotFAFile);
 
@@ -338,7 +352,7 @@ public class MainWindow {
 		groupPlotFA.add(rdbtnNewRadioButtonPlotFAFile);
 		rdbtnNewRadioButtonPlotFADirect.setSelected(true);
 
-		JButton btnNewButtonPlotFAFile = new JButton("File");
+		JButton btnNewButtonPlotFAFile = new JButton("Súbor");
 		btnNewButtonPlotFAFile.setBounds(44, 230, 97, 25);
 		panelPlot.add(btnNewButtonPlotFAFile);
 
@@ -360,7 +374,7 @@ public class MainWindow {
 		panelPlot.add(textFieldPlotFAFile);
 		textFieldPlotFAFile.setColumns(10);
 
-		JButton btnNewButtonPlotFA = new JButton("Clear Fields");
+		JButton btnNewButtonPlotFA = new JButton("Vymazať Polia");
 		btnNewButtonPlotFA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnNewRadioButtonPlotFADirect.setSelected(true);
@@ -381,7 +395,7 @@ public class MainWindow {
 		JComboBox comboBox_Vigenere_Cipher = new JComboBox(Alphabet);
         panelVigenere.add(comboBox_Vigenere_Cipher);
 		
-		JButton btnNewButtonVigenereCipher = new JButton("Clear Fields");
+		JButton btnNewButtonVigenereCipher = new JButton("Vymazať Polia");
 		btnNewButtonVigenereCipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textAreaVigenere.setText("");
@@ -397,10 +411,11 @@ public class MainWindow {
 		
 
 		JPanel panelFALetters = new JPanel();
-		tabbedPane.addTab("Frequency Analysis", null, panelFALetters, null);
+		tabbedPane.addTab("Frekvenčná Analýza", null, panelFALetters, null);
 		panelFALetters.setLayout(null);
 
 		JLabel lblNewLabelFALetters = new JLabel("Frequency Analysis Letters");
+		lblNewLabelFALetters.setVisible(false);
 		lblNewLabelFALetters.setBounds(44, 31, 156, 16);
 		panelFALetters.add(lblNewLabelFALetters);
 
@@ -417,11 +432,11 @@ public class MainWindow {
 		StockPublicNotesDocumentFilter publicNotesfilterLetter = new StockPublicNotesDocumentFilter(100);
 		((PlainDocument) txtrLetter.getDocument()).setDocumentFilter(publicNotesfilterLetter);
 
-		JRadioButton rdbtnNewRadioButtonLetterFADirect = new JRadioButton("Direct Input Text (Max 100 characters)");
+		JRadioButton rdbtnNewRadioButtonLetterFADirect = new JRadioButton("Priame Zadávanie Textu (Max 100 znakov)");
 		rdbtnNewRadioButtonLetterFADirect.setBounds(39, 55, 280, 25);
 		panelFALetters.add(rdbtnNewRadioButtonLetterFADirect);
 
-		JRadioButton rdbtnNewRadioButtonLetterFAFile = new JRadioButton("Reading a Text File");
+		JRadioButton rdbtnNewRadioButtonLetterFAFile = new JRadioButton("Čítanie Textového Súboru");
 		rdbtnNewRadioButtonLetterFAFile.setBounds(39, 196, 184, 25);
 		panelFALetters.add(rdbtnNewRadioButtonLetterFAFile);
 
@@ -430,7 +445,7 @@ public class MainWindow {
 		groupPlotLetterFA.add(rdbtnNewRadioButtonLetterFAFile);
 		rdbtnNewRadioButtonLetterFADirect.setSelected(true);
 
-		JButton btnNewButtonLetterFAFile = new JButton("File FA");
+		JButton btnNewButtonLetterFAFile = new JButton("Súbor");
 		btnNewButtonLetterFAFile.setBounds(44, 230, 97, 25);
 		panelFALetters.add(btnNewButtonLetterFAFile);
 
@@ -439,7 +454,7 @@ public class MainWindow {
 	//	tabbedPane.addTab("Substitution Cipher With a Keyword", null, panelSubstitutionCipherWithaKeyword, null);
 		panelSubstitutionCipherWithaKeyword.setLayout(null);
 
-		JLabel lblNewLabel_1s = new JLabel("Plain Text");
+		JLabel lblNewLabel_1s = new JLabel("Nešifrovaný Text");
 		lblNewLabel_1s.setBounds(44, 31, 156, 16);
 		panelSubstitutionCipherWithaKeyword.add(lblNewLabel_1s);
 
@@ -459,7 +474,7 @@ public class MainWindow {
 			}
 		});
 		                                             
-		JButton btnNewButtonEncryptVigenereCipher = new JButton("Encrypt");
+		JButton btnNewButtonEncryptVigenereCipher = new JButton("Zašifrovať");
 		btnNewButtonEncryptVigenereCipher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -510,11 +525,11 @@ public class MainWindow {
 		btnCaesarDecrypts.setBounds(328, 293, 128, 25);
 		panelSubstitutionCipherWithaKeyword.add(btnCaesarDecrypts);
 
-		JLabel labels = new JLabel("Cipher Text");
+		JLabel labels = new JLabel("Zašifrovaný Text");
 		labels.setBounds(44, 328, 156, 16);
 		panelSubstitutionCipherWithaKeyword.add(labels);
 
-		JLabel lblNewLabel_2sss = new JLabel("Keyword:");
+		JLabel lblNewLabel_2sss = new JLabel("Kľúč:");
 		lblNewLabel_2sss.setBounds(44, 261, 56, 16);
 		panelSubstitutionCipherWithaKeyword.add(lblNewLabel_2sss);
 
@@ -530,11 +545,11 @@ public class MainWindow {
 	//	outputTextAreaSubstitution.setText("Some text to display in the JTextArea");
 		scrollPane_1ss.setViewportView(outputTextAreaSubstitution);
 
-		JButton btnNewButtonCipherKeywordClear = new JButton("Clear fields");
+		JButton btnNewButtonCipherKeywordClear = new JButton("Vymazať Polia");
 		btnNewButtonCipherKeywordClear.setBounds(478, 293, 109, 25);
 		panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 
-		JLabel label_1 = new JLabel("Alphabet");
+		JLabel label_1 = new JLabel("Abeceda");
 		label_1.setBounds(334, 261, 56, 16);
 		panelSubstitutionCipherWithaKeyword.add(label_1);
 
@@ -575,7 +590,7 @@ public class MainWindow {
 	//			panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis, null);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.setLayout(null);
 
-		JLabel lblNewLabel_1ss = new JLabel("Cipher Text");
+		JLabel lblNewLabel_1ss = new JLabel("Zašifrovaný Text");
 		lblNewLabel_1ss.setBounds(44, 31, 156, 16);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(lblNewLabel_1ss);
 
@@ -590,7 +605,7 @@ public class MainWindow {
 		textAreaCipherKeyword = new JTextArea();    //Cracking Substitution Cipher With a Keyword Using Frequency Analysis first TextArea
 		scrollPaness.setViewportView(textAreaCipherKeyword);
 
-		JButton btnDecrypts = new JButton("Crack");
+		JButton btnDecrypts = new JButton("Prelomiť");
 		btnDecrypts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -607,33 +622,8 @@ public class MainWindow {
 		btnDecrypts.setBounds(280, 216, 128, 25);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(btnDecrypts);
 		
-	/*	
-		JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Crack using FA");
-		btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					String outPut = pythonHandler
-							.givenPythonScript_whenPythonProcessExecuted_thenSuccessCrackVigenerCipher(
-									cipherTextLabel.getText());
-					decodedTextLabel.setText(outPut);
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
-		});
-		
-		*/
-		
 
-		// JLabel lblNewLabel_2ss = new JLabel("Keyword:");
-		// lblNewLabel_2ss.setBounds(44, 206, 56, 16);
-		// panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(lblNewLabel_2ss);
-
-		// JTextField keywordTextFieldss = new JTextField();
-		// keywordTextFieldss.setBounds(101, 203, 209, 22);
-		// panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(keywordTextFieldss);
-
-		JLabel labelss = new JLabel("Plain Text");
+		JLabel labelss = new JLabel("Nezašifrovaný Text");
 		labelss.setBounds(44, 251, 156, 16);
 		panelCrackingSubstitutionCipherWithaKeywordUsingFrequencyAnalysis.add(labelss);
 
@@ -666,7 +656,7 @@ public class MainWindow {
 	
 
 		
-		JButton btnNewButtonVigenereCipher2 = new JButton("Pick File");
+		JButton btnNewButtonVigenereCipher2 = new JButton("Vybrať Súbor");
 		btnNewButtonVigenereCipher2.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        try {
@@ -706,11 +696,11 @@ public class MainWindow {
 		panelFALetters.add(textFieldLetterFAFile);
 		textFieldLetterFAFile.setColumns(10);
 
-		JButton btnLetter = new JButton("Generated Report");
-		btnLetter.setBounds(222, 279, 149, 25);
+		JButton btnLetter = new JButton("Vygenerovať Správu");
+		btnLetter.setBounds(172, 279, 200, 25);
 		panelFALetters.add(btnLetter);
 
-		JLabel labelLetter = new JLabel("Output");
+		JLabel labelLetter = new JLabel("Výstup");
 		labelLetter.setBounds(44, 319, 156, 16);
 		panelFALetters.add(labelLetter);
 
@@ -724,7 +714,7 @@ public class MainWindow {
 		scrollPaneLetterOutPut.setViewportView(txtrLetterOutPut);
 		txtrLetterOutPut.setLineWrap(true);
 
-		JButton btnNewButtonLetterFA = new JButton("Clear Fields");
+		JButton btnNewButtonLetterFA = new JButton("Vymazať Polia");
 		btnNewButtonLetterFA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnNewRadioButtonLetterFADirect.setSelected(true);
@@ -737,17 +727,17 @@ public class MainWindow {
 		panelFALetters.add(btnNewButtonLetterFA);
 		
 
-		tabbedPane.addTab("Vigenere Cipher", null, panelVigenere, null);
+		tabbedPane.addTab("Vigenerova Šifra", null, panelVigenere, null);
 		panelVigenere.setLayout(null);
 		
-		JLabel lblNewLabelVigenereAlphabet = new JLabel("Alphabet");
+		JLabel lblNewLabelVigenereAlphabet = new JLabel("Abeceda");
 		lblNewLabelVigenereAlphabet.setBounds(352, 211, 63, 16);
 		panelVigenere.add(lblNewLabelVigenereAlphabet);
 
 	
 		
 		
-		JLabel lblNewLabel_Vigenere = new JLabel("Keyword:");
+		JLabel lblNewLabel_Vigenere = new JLabel("Kľúč:");
 		lblNewLabel_Vigenere.setBounds(44, 211, 56, 16);
 		panelVigenere.add(lblNewLabel_Vigenere);
 		
@@ -755,7 +745,7 @@ public class MainWindow {
 		keywordTextFieldVigenere.setBounds(101, 211, 209, 22);
 		panelVigenere.add(keywordTextFieldVigenere);
 
-		btnNewButtonVigenereCipher2.setBounds(44, 260, 97, 25);
+		btnNewButtonVigenereCipher2.setBounds(44, 260, 125, 25);
 		panelVigenere.add(btnNewButtonVigenereCipher2);
 		
 		
@@ -814,45 +804,19 @@ public class MainWindow {
 		
 
 		
-		JLabel lblNewLabelVigenere = new JLabel("Plain Text (Enter Capital Letters Without Spaces)");
-		lblNewLabelVigenere.setBounds(44, 31, 356, 16);
+		JLabel lblNewLabelVigenere = new JLabel("Nešifrovaný Text (Zadajte Veľké Písmená Bez Medzier a Bez Diakritiky)");
+		lblNewLabelVigenere.setBounds(44, 31, 456, 16);
 		panelVigenere.add(lblNewLabelVigenere);
 		
-		JLabel lblNewLabelSecondVigenere = new JLabel("Cipher Text");
+		JLabel lblNewLabelSecondVigenere = new JLabel("Zašifrovaný Text");
 		lblNewLabelSecondVigenere.setBounds(44, 321, 156, 16);
 		panelVigenere.add(lblNewLabelSecondVigenere);
 
 		
 		JPanel panelCrackingVigenere = new JPanel();
-		tabbedPane.addTab("Cracking Vigenere Cipher Using Frequency Analysis", null, panelCrackingVigenere, null);
+		tabbedPane.addTab("Prelamovanie Vigenerovej Šifry Pomocou Frekvenčnej Analýzy", null, panelCrackingVigenere, null);
 		panelCrackingVigenere.setLayout(null);
 		
-	/*	
-		JComboBox<String> dropdownMenuTypeOfText = new JComboBox<String>();
-
-		// Add items to the JComboBox
-		dropdownMenuTypeOfText.addItem("Choose Option");
-		dropdownMenuTypeOfText.addItem("Newspaper Article");
-		dropdownMenuTypeOfText.addItem("Educational Text");
-		dropdownMenuTypeOfText.addItem("Fictionalized Text");
-		dropdownMenuTypeOfText.setBounds(60, 210, 130, 30);
-
-		// Add a listener to handle selection events
-		dropdownMenuTypeOfText.addItemListener(new ItemListener() {
-		    @Override
-		    public void itemStateChanged(ItemEvent e) {
-		        if (e.getStateChange() == ItemEvent.SELECTED) {
-		            String selectedItem = (String) dropdownMenuTypeOfText.getSelectedItem();
-		            // Handle the selection event here
-		            System.out.println("Selected item: " + selectedItem);
-		        }
-		    }
-		});
-
-
-		// Add the JComboBox to your panel
-		panelCrackingVigenere.add(dropdownMenuTypeOfText);
-		*/	
 		
 
 		JTextArea textAreaCrackingVigenere = new JTextArea();
@@ -874,8 +838,8 @@ public class MainWindow {
 
 		panelCrackingVigenere.add(scrollPaneCrackingVigenere);
 		
-		JLabel lblNewLabelCrackingVigenere = new JLabel("Sucess percentage of cracking : ");
-	    lblNewLabelCrackingVigenere.setBounds(220, 410, 250, 25);
+		JLabel lblNewLabelCrackingVigenere = new JLabel("Percento Úspešnosti Prelomenia: ");
+	    lblNewLabelCrackingVigenere.setBounds(220, 430, 250, 25);
 		panelCrackingVigenere.add(lblNewLabelCrackingVigenere);
 		
 		
@@ -891,7 +855,7 @@ public class MainWindow {
 
 		
 		int SecondtextAreaCrackingVigenereX = 60; 
-		int SecondtextAreaCrackingVigenereY = 280; 
+		int SecondtextAreaCrackingVigenereY = 320; 
 		int SecondtextAreaCrackingVigenereWidth = 700; 
 		int SecondtextAreaCrackingVigenereHeight = 100; 
 		scrollSecondtextAreaCrackingVigenere.setBounds(SecondtextAreaCrackingVigenereX, SecondtextAreaCrackingVigenereY, SecondtextAreaCrackingVigenereWidth, SecondtextAreaCrackingVigenereHeight);
@@ -915,7 +879,7 @@ public class MainWindow {
 
 		
 		int ThirdTextAreaCrackingVigenereX = 410; 
-		int ThirdTextAreaCrackingVigenereY = 415; 
+		int ThirdTextAreaCrackingVigenereY = 435; 
 		int ThirdTextAreaCrackingVigenereWidth = 70; 
 		int ThirdTextAreaCrackingVigenereHeight = 20; 
 		scrollThirdTextAreaCrackingVigenere.setBounds(ThirdTextAreaCrackingVigenereX, ThirdTextAreaCrackingVigenereY, ThirdTextAreaCrackingVigenereWidth, ThirdTextAreaCrackingVigenereHeight);
@@ -941,7 +905,7 @@ panelSubstitutionCipherWithaKeyword.add(btnNewButtonCipherKeywordClear);
 		
 
 
-JLabel cipherTextLabel = new JLabel("Cipher Text");
+JLabel cipherTextLabel = new JLabel("Zašifrovaný Text");
 
 
 int cipherTextLabelX = 60; 
@@ -955,11 +919,11 @@ panelCrackingVigenere.add(cipherTextLabel);
 
 
 
-JLabel decodedTextLabel = new JLabel("Cracked Text");
+JLabel decodedTextLabel = new JLabel("Prelomený Text");
 
 
 int decodedTextLabelX = 60; 
-int decodedTextLabelY = 260; 
+int decodedTextLabelY = 300; 
 int decodedTextLabelWidth = 100;
 int decodedTextLabelHeight = 20; 
 decodedTextLabel.setBounds(decodedTextLabelX, decodedTextLabelY, decodedTextLabelWidth, decodedTextLabelHeight);
@@ -970,7 +934,7 @@ panelCrackingVigenere.add(decodedTextLabel);
 
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Crack English Text");
+JButton btnCrackVigenereCipherFrequencyAnalysis = new JButton("Prelomiť Anglický Text");
 btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -1019,9 +983,9 @@ btnCrackVigenereCipherFrequencyAnalysis.addActionListener(new ActionListener() {
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisX = 10; 
+int btnCrackVigenereCipherFrequencyAnalysisX = 210; 
 int btnCrackVigenereCipherFrequencyAnalysisY = 210; 
-int btnCrackVigenereCipherFrequencyAnalysisWidth = 150; 
+int btnCrackVigenereCipherFrequencyAnalysisWidth = 200; 
 int btnCrackVigenereCipherFrequencyAnalysisHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysis.setBounds(btnCrackVigenereCipherFrequencyAnalysisX, btnCrackVigenereCipherFrequencyAnalysisY, btnCrackVigenereCipherFrequencyAnalysisWidth, btnCrackVigenereCipherFrequencyAnalysisHeight);
 
@@ -1038,7 +1002,7 @@ panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysis);
 
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysisNewsArticle = new JButton("Crack Slovak News Article");
+JButton btnCrackVigenereCipherFrequencyAnalysisNewsArticle = new JButton("Prelomiť Slovenský Novinový Článok");
 btnCrackVigenereCipherFrequencyAnalysisNewsArticle.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -1087,9 +1051,9 @@ btnCrackVigenereCipherFrequencyAnalysisNewsArticle.addActionListener(new ActionL
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisNewsArticleX = 330; 
-int btnCrackVigenereCipherFrequencyAnalysisNewsArticleY = 210; 
-int btnCrackVigenereCipherFrequencyAnalysisNewsArticleWidth = 200; 
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleX = 30; 
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleY = 250; 
+int btnCrackVigenereCipherFrequencyAnalysisNewsArticleWidth = 250; 
 int btnCrackVigenereCipherFrequencyAnalysisNewsArticleHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysisNewsArticle.setBounds(btnCrackVigenereCipherFrequencyAnalysisNewsArticleX, btnCrackVigenereCipherFrequencyAnalysisNewsArticleY, btnCrackVigenereCipherFrequencyAnalysisNewsArticleWidth, btnCrackVigenereCipherFrequencyAnalysisNewsArticleHeight);
 
@@ -1102,7 +1066,7 @@ panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysisNewsArticle);
 
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysisEducationalArticle = new JButton("Crack Slovak Educational Article");
+JButton btnCrackVigenereCipherFrequencyAnalysisEducationalArticle = new JButton("Prelomiť Slovenský Odborný Text");
 btnCrackVigenereCipherFrequencyAnalysisEducationalArticle.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -1151,8 +1115,8 @@ btnCrackVigenereCipherFrequencyAnalysisEducationalArticle.addActionListener(new 
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleX = 540; 
-int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleY = 210; 
+int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleX = 290; 
+int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleY = 250; 
 int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleWidth = 250; 
 int btnCrackVigenereCipherFrequencyAnalysisEducationalArticleHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysisEducationalArticle.setBounds(btnCrackVigenereCipherFrequencyAnalysisEducationalArticleX, btnCrackVigenereCipherFrequencyAnalysisEducationalArticleY, btnCrackVigenereCipherFrequencyAnalysisEducationalArticleWidth, btnCrackVigenereCipherFrequencyAnalysisEducationalArticleHeight);
@@ -1162,7 +1126,7 @@ panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysisEducationalArti
 
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle = new JButton("Crack Slovak Fictionalized Article");
+JButton btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle = new JButton("Prelomiť Slovenský Beletrizovaný Text");
 btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -1211,9 +1175,9 @@ btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle.addActionListener(ne
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleX = 800; 
-int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleY = 210; 
-int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleWidth = 250; 
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleX = 550; 
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleY = 250; 
+int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleWidth = 300; 
 int btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticle.setBounds(btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleX, btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleY, btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleWidth, btnCrackVigenereCipherFrequencyAnalysisFictionalizedArticleHeight);
 
@@ -1235,7 +1199,7 @@ panelCrackingVigenere.add(btnCrackVigenereCipherFrequencyAnalysisFictionalizedAr
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-JButton btnCrackVigenereCipherFrequencyAnalysisSlovak = new JButton("Crack Slovak Text ");
+JButton btnCrackVigenereCipherFrequencyAnalysisSlovak = new JButton("Prelomiť Slovenský Text ");
 btnCrackVigenereCipherFrequencyAnalysisSlovak.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         try {
@@ -1284,9 +1248,9 @@ btnCrackVigenereCipherFrequencyAnalysisSlovak.addActionListener(new ActionListen
 
 
 
-int btnCrackVigenereCipherFrequencyAnalysisSlovakX = 170; 
+int btnCrackVigenereCipherFrequencyAnalysisSlovakX = 460; 
 int btnCrackVigenereCipherFrequencyAnalysisSlovakY = 210; 
-int btnCrackVigenereCipherFrequencyAnalysisSlovakWidth = 150; 
+int btnCrackVigenereCipherFrequencyAnalysisSlovakWidth = 200; 
 int btnCrackVigenereCipherFrequencyAnalysisSlovakHeight = 30; 
 btnCrackVigenereCipherFrequencyAnalysisSlovak.setBounds(btnCrackVigenereCipherFrequencyAnalysisSlovakX, btnCrackVigenereCipherFrequencyAnalysisSlovakY, btnCrackVigenereCipherFrequencyAnalysisSlovakWidth, btnCrackVigenereCipherFrequencyAnalysisSlovakHeight);
 

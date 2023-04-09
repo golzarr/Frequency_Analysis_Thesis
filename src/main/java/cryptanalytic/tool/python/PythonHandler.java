@@ -11,10 +11,12 @@ import org.apache.commons.exec.PumpStreamHandler;
 
 public class PythonHandler {
 
+	
+	
 	public String givenPythonScript_whenPythonProcessExecuted_thenSuccess(String param, String text, String key)
+	
+	
 			throws ExecuteException, IOException {
-		// Parameter 0 Encrytion
-		// Parameter 1 Dencrytion
 		String line = "python "
 				+ resolvePythonScriptPath("caesarCipherThesis.py " + param + " " + key + " \"" + text + "\"");
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -26,6 +28,11 @@ public class PythonHandler {
 		int exitCode = executor.execute(cmdLine);
 		return outputStream.toString().trim();
 	}
+	
+	
+	
+	
+	
 
 	/**
 	 * @param text
@@ -118,7 +125,6 @@ public class PythonHandler {
 			throws ExecuteException, IOException {
 
 		String line = "python " + resolvePythonScriptPath("frequencyAnalysisLetterReport.py" + " \"" + text + "\"");
-//		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -138,7 +144,6 @@ public class PythonHandler {
 			throws ExecuteException, IOException {
 
 		String line = "python " + resolvePythonScriptPath("frequencyAnalysisLetterReportFile.py" + " \"" + text + "\"");
-//		System.out.println("PythonHandler.givenPythonScript_whenPythonProcessExecuted_thenSuccess()");
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
